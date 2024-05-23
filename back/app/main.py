@@ -2,11 +2,10 @@ from fastapi import FastAPI, HTTPException, Request
 from neo4j import GraphDatabase
 from pydantic import BaseModel
 from typing import List, Optional
-from .config import Config  # Correct import here
+from .config import Config  
 
 app = FastAPI()
 
-# Initialize Neo4j driver
 driver = Config.get_driver()
 
 # Close the driver connection when the app is shutting down
