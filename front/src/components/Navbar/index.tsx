@@ -1,24 +1,22 @@
-import { Logo, Info } from "../Icons";
-
+import { Info } from "../Icons";
+import CypherSearch from "../Cypher";
 
 export default function Navbar() {
   return (
-    <nav>
-      <div className="logo-area">
-        <Logo className={"globus-logo"} />
-        <h1 className="logo">Earth4j</h1>
+    <nav className="h-24 w-full z-10 bg-[#1e1e2e] absolute bottom-0 m-0 p-0 flex justify-center">
+      <div className="flex flex-row gap-10 h-full w-6/12 min-w-96 justify-center items-center mt-1">
+      <div className="flex">
+        <h1 className="text-gray-300 font-bold">Earth4j</h1>
       </div>
-      <div className="search-area">
-        {/* Searchbar is not working in this repo idk */}
-      </div>
-      <div className="github-wrapper">
+        <CypherSearch />
+      <div className="flex justify-center items-center mt-1 github-wrapper group">
         <a
-          className="info-link"
           href="https://github.com/tarazonaa/neo4j-sustentabilidad"
           aria-label="Info"
         >
           <Info />
         </a>
+      </div>
       </div>
     </nav>
   );

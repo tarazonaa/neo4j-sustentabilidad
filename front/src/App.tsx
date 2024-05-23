@@ -1,4 +1,3 @@
-import './App.css';
 import { lazy, useState, useEffect, Suspense, createContext } from 'react';
 import Navbar from './components/Navbar';
 
@@ -23,7 +22,7 @@ function App() {
         closed,
         setClosed,
       }}>
-        <div className="container">
+        <div className="flex m-0 p-0 flex-[1] justify-center -z-10">
           <div className='globe-container'>
             <Suspense fallback={<div className='loading-container'><div className='lds-ripple'><div></div><div></div></div></div>}>
               <Globe />
