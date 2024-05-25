@@ -11,16 +11,8 @@ import { CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import ThreeGlobe from "three-globe";
 
-export const GLOBE_SETTINGS = {
-  COLORS: {
-    background: "#212121",
-    globe: "#133D6D",
-    ambientLight: "#0A0A0A",
-    polygon: "#9BB579",
-    emissionLight: "#DEFFD9",
-  },
-  atmosphereLevel: 0.2,
-};
+import { GLOBE_SETTINGS } from "../constants";
+
 
 interface GlobeInitParams {
   containerRef: React.RefObject<HTMLDivElement>;
@@ -41,6 +33,7 @@ export const initializeGlobe = ({
   container.innerHTML = "";
 
   const renderers = [new WebGLRenderer(), new CSS2DRenderer()];
+
   renderers.forEach((r, idx) => {
     r.setSize(window.innerWidth, window.innerHeight);
     if (idx > 0) {
@@ -68,7 +61,7 @@ export const initializeGlobe = ({
   globe.globeMaterial(globeMaterial);
 
   scene.add(globe);
-  scene.add(new AmbientLight(new Color(GLOBE_SETTINGS.COLORS.ambientLight), 1));  
+  scene.add(new AmbientLight(new Color(GLOBE_SETTINGS.COLORS.ambientLight), 1));
 
   const camera = new PerspectiveCamera();
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -93,8 +86,7 @@ export const initializeGlobe = ({
   controls.maxDistance = 300;
   controls.rotateSpeed = 0.4;
   controls.zoomSpeed = 1;
-  controls.autoRotate = true;
-  controls.autoRotateSpeed = -0.05;
+
   globe.setPointOfView(camera.position, globe.position);
   controls.addEventListener("change", () =>
     globe.setPointOfView(camera.position, globe.position)
@@ -116,17 +108,5 @@ export const initializeGlobe = ({
   window.addEventListener("resize", onWindowResize, false);
   document.addEventListener("mousemove", onMouseMove);
 
-  const animate = () => {
-    camera && camera.lookAt(scene.position);
-    controls && controls.update();
-    renderers.forEach((r) => {
-      r.render(scene, camera);
-    });
-    requestAnimationFrame(animate);
-  };
-
-  animate();
-
-
-  return { scene, camera, controls, globe };
+  return { scene, camera, controls, globe, renderers };
 };
