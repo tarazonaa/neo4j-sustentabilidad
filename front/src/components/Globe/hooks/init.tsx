@@ -10,17 +10,12 @@ import {
 import { CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import ThreeGlobe from "three-globe";
+import React, { useEffect } from "react";
 
 import { GLOBE_SETTINGS } from "../constants";
+import globeData from '@/assets/globe-data.json';
 
-
-interface GlobeInitParams {
-  containerRef: React.RefObject<HTMLDivElement>;
-  globeData: any;
-  windowCenter: { x: number; y: number };
-  mousePosition: { x: number; y: number };
-}
-
+import type { GlobeInitParams, FrameData } from "@/types.ts";
 
 export const initializeGlobe = ({ 
   containerRef, 
@@ -110,3 +105,29 @@ export const initializeGlobe = ({
 
   return { scene, camera, controls, globe, renderers };
 };
+
+
+export const useGlobe = (
+  containerRef: React.MutableRefObject<any>,
+  setFrameData: null | ((d: FrameData) => any),
+  setGlobe: null | ((d: FrameData["globe"]) => any)
+) => {
+  useEffect(() => {
+    if (!containerRef.current || !setFrameData || !setGlobe)
+      return;
+  
+    const initData = initializeGlobe({
+      containerRef,
+      globeData,
+      windowCenter: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+      mousePosition: { x: 0, y: 0 },
+    });
+  
+    if (initData) {
+      setFrameData(initData as FrameData)
+      setGlobe(initData.globe)
+    }
+
+  }, [containerRef, setFrameData, setGlobe]);
+}
+

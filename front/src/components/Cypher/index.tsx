@@ -34,10 +34,10 @@ const queries = [
 
 export default function CypherSearch() {
   const [cypher, setCypher] = useState("Run CYPHER");
-  const { globe, camera } = useContext(GlobeContext);
+  const { globe } = useContext(GlobeContext);
 
   const onValueChange = (value: string) => {
-    handleQuery({cypher: value, globe, camera});
+    handleQuery({cypher: value, globe});
     setCypher(value);
   }
 
@@ -67,11 +67,11 @@ export default function CypherSearch() {
 interface HandleQueryParams {
   cypher: string;
   globe: any;
-  camera: Camera;
+  camera?: Camera;
 }
 
 // Esto ahorita solo colorea USA de rojo (falta usar los datos del api y maybe agregar labels?)
-const handleQuery = ({cypher, globe, camera}: HandleQueryParams) => {
+const handleQuery = ({cypher, globe}: HandleQueryParams) => {
   if (!globe) return;
   let coordinates: any = null;
 
@@ -88,13 +88,4 @@ const handleQuery = ({cypher, globe, camera}: HandleQueryParams) => {
     });
   
   if (!coordinates) return;
-
-  const altitude = camera.position.z / globe.getGlobeRadius();
-  const position = globe.getCoords(coordinates, altitude);
-  camera.lookAt(position);
-
-  // Esto no se puede llamar aquí al parecer :(
-  requestAnimationFrame(() => {
-    camera.lookAt(position);
-  });
 }
