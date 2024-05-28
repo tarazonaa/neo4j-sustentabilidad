@@ -3,7 +3,6 @@ import {
   useState
 } from "react";
 
-import type { Camera } from "three";
 import { Color } from "three";
 
 import {
@@ -17,9 +16,12 @@ import {
   SelectSeparator
 } from "@/components/ui/select";
 
-import countryData from "@/assets/countries.json";
+import * as API from "./queries";
 
 import { GlobeContext } from "@/App";
+import { GLOBE_SETTINGS } from "@/components/Globe/constants";
+
+import type ThreeGlobe from "three-globe";
 
 const queries = [
   { 
@@ -37,13 +39,22 @@ export default function CypherSearch() {
   const { globe } = useContext(GlobeContext);
 
   const onValueChange = (value: string) => {
+    if (value == "")
+      return;
+
     handleQuery({cypher: value, globe});
     setCypher(value);
   }
 
+  const clear = () => {
+    handleClear(globe);
+    setCypher("");
+  }
+
   return (
-    <Select onValueChange={onValueChange}>
-      <SelectTrigger className="w-10/12 dark text-gray-300 border-gray-500 text-xs">
+    <div className="w-11/12 flex flex-row gap-2">
+    <Select onValueChange={onValueChange} value={cypher}>
+      <SelectTrigger className="w-11/12 dark text-gray-300 border-gray-500 text-xs">
         <SelectValue placeholder="Run CYPHER">
           {cypher}
         </SelectValue>
@@ -53,7 +64,7 @@ export default function CypherSearch() {
           <SelectLabel>Queries</SelectLabel>
           <SelectSeparator/>
           {queries.map((query) => (
-            <SelectItem id={query.label} key={query.value} value={query.value} onSelect={(e) => console.log(e)}>
+            <SelectItem id={query.label} key={query.value} value={query.value}>
               {query.label}
             </SelectItem>
           ))}
@@ -61,31 +72,66 @@ export default function CypherSearch() {
         
       </SelectContent>
     </Select>
+    <button onClick={clear} className="w-16 dark rounded-lg text-white p-1">&#10060;</button>
+    </div>
   )
 }
 
 interface HandleQueryParams {
   cypher: string;
-  globe: any;
-  camera?: Camera;
+  globe: null | ThreeGlobe;
 }
 
-// Esto ahorita solo colorea USA de rojo (falta usar los datos del api y maybe agregar labels?)
-const handleQuery = ({cypher, globe}: HandleQueryParams) => {
+const handleQuery = async ({cypher, globe}: HandleQueryParams) => {
   if (!globe) return;
-  let coordinates: any = null;
 
-  console.log("Running query: ", cypher);
+  const countries = await API.getCountries();
+  if (!countries || !countries?.length) return;
+
+  const codes = new Set(countries.map((country: any) => String(country?.code).trim()));
+
+  const markers = document.querySelectorAll(".country-marker");
+  markers?.forEach((marker) => {
+    const countryCode = marker?.id?.split("-")?.[1];
+    if (codes.has(countryCode)) {
+      marker.classList.remove("hidden")
+    } else {
+      marker.classList.add("hidden")
+    }
+  });
+
+  const minColor = new Color(GLOBE_SETTINGS.COLORS.highlightPolygonMin);
+  const maxColor = new Color(GLOBE_SETTINGS.COLORS.highlightPolygonMax);
+  const inactiveColor = new Color(GLOBE_SETTINGS.COLORS.inactivePolygon);
+
+  const colorSpace = (alpha: number) => minColor.clone().lerp(maxColor, alpha);
+
+  let current = 0.15;
 
   globe
     .hexPolygonsData()
-    .filter((d: any) => d.properties["ISO_A3"] == "USA")
-    .forEach((d:any) => {
-      d["__threeObj"].material.color = new Color('#FF0000');
-      console.log(d)
-      if (coordinates == null)
-        coordinates = countryData.countriesCollection["USA"].coordinates;
+    .forEach((d: any) => {
+      if (codes.has(d?.properties?.ISO_A3)) {
+        d.__threeObj.material.color = colorSpace(current);
+        current += 0.15;
+      } else {
+        d.__threeObj.material.color = inactiveColor;
+      }
+    });
+}
+
+const handleClear = (globe: null | ThreeGlobe) => {
+  if (!globe) return;
+
+  const defaultColor = new Color(GLOBE_SETTINGS.COLORS.polygon);
+  globe
+    .hexPolygonsData()
+    .forEach((d: any) => {
+      d.__threeObj.material.color = defaultColor;
     });
   
-  if (!coordinates) return;
+  const markers = document.querySelectorAll(".country-marker");
+  markers?.forEach((marker) => {
+    marker.classList.add("hidden")
+  });
 }
