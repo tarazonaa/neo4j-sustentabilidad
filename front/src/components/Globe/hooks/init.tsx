@@ -10,17 +10,13 @@ import {
 import { CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import ThreeGlobe from "three-globe";
+import React, { useEffect } from "react";
 
 import { GLOBE_SETTINGS } from "../constants";
+import globeData from '@/assets/globe-data.json';
+import countries from '@/assets/countries.json';
 
-
-interface GlobeInitParams {
-  containerRef: React.RefObject<HTMLDivElement>;
-  globeData: any;
-  windowCenter: { x: number; y: number };
-  mousePosition: { x: number; y: number };
-}
-
+import type { GlobeInitParams, FrameData } from "@/types.ts";
 
 export const initializeGlobe = ({ 
   containerRef, 
@@ -53,6 +49,30 @@ export const initializeGlobe = ({
     .hexPolygonUseDots(true)
     .hexPolygonColor(() => GLOBE_SETTINGS.COLORS.polygon)
     .atmosphereAltitude(GLOBE_SETTINGS.atmosphereLevel)
+
+  globe
+    .htmlElementsData(Object.entries(countries.countriesCollection))
+    .htmlLat(([, d]: any) => parseFloat(d.coordinates[0]))
+    .htmlLng(([, d]: any) => parseFloat(d.coordinates[1]))
+    .htmlAltitude(0.02)
+    .htmlElement(([iso3, _d]: any) => {
+      const el = document.createElement('button');
+      el.innerHTML = iso3.toUpperCase();
+      el.classList.add(
+        'country-marker',
+        'bg-gray-700',
+        'rounded-lg',
+        'text-white',
+        'p-2',
+        'hidden',
+      );
+
+      el.id = `label-${iso3}`
+      el.addEventListener('mousedown', (event) => {
+        event.preventDefault();
+      });        
+      return el;
+    });
 
   const globeMaterial = new MeshBasicMaterial({
     color: new Color(GLOBE_SETTINGS.COLORS.globe),
@@ -110,3 +130,29 @@ export const initializeGlobe = ({
 
   return { scene, camera, controls, globe, renderers };
 };
+
+
+export const useGlobe = (
+  containerRef: React.MutableRefObject<any>,
+  setFrameData: null | ((d: FrameData) => any),
+  setGlobe: null | ((d: FrameData["globe"]) => any)
+) => {
+  useEffect(() => {
+    if (!containerRef.current || !setFrameData || !setGlobe)
+      return;
+  
+    const initData = initializeGlobe({
+      containerRef,
+      globeData,
+      windowCenter: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+      mousePosition: { x: 0, y: 0 },
+    });
+  
+    if (initData) {
+      setFrameData(initData as FrameData)
+      setGlobe(initData.globe)
+    }
+
+  }, [containerRef, setFrameData, setGlobe]);
+}
+

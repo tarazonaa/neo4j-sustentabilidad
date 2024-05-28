@@ -1,30 +1,18 @@
 import { lazy, useState, useEffect, Suspense, createContext } from 'react';
 import Navbar from './components/Navbar';
 
-const Globe = lazy(() => import('./components/Globe'));
+import type { GlobeContextProps } from './types';
 
-interface GlobeContextProps {
-  globe: any;
-  setGlobe: null | ((d: any) => void);
-  camera: any;
-  setCamera: null | ((d: any) => void);
-  renderers: any[];
-  setRenderers: any | ((d: any) => void);
-}
+const Globe = lazy(() => import('./components/Globe'));
 
 export const GlobeContext = createContext<GlobeContextProps>({
   globe: null, setGlobe: null,
-  camera: null, setCamera: null,
-  renderers: [], setRenderers: null,
 });
 
 function App() {
   const [closed, setClosed] = useState(false);
 
-  // Probs conviene cambiar estos 3 useStates a un solo objeto xd
   const [globe, setGlobe] = useState<any>();
-  const [camera, setCamera] = useState<any>();
-  const [renderers, setRenderers] = useState<any[]>([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,8 +23,6 @@ function App() {
   return (
     <GlobeContext.Provider value={{
       globe, setGlobe,
-      camera, setCamera,
-      renderers, setRenderers
     }}>
       <div className="flex m-0 p-0 flex-[1] justify-center -z-10">
         <div className='globe-container'>
