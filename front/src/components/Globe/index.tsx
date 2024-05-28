@@ -14,7 +14,7 @@ const Globe = () => {
   useAnimate(frameData);
 
   return (
-    <div ref={containerRef} id='globe-visualizer'></div>
+    <div ref={containerRef} id='globe-visualizer' className='transition-colors'></div>
   )
 };
 

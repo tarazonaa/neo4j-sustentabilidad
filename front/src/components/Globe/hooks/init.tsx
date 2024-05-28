@@ -14,6 +14,7 @@ import React, { useEffect } from "react";
 
 import { GLOBE_SETTINGS } from "../constants";
 import globeData from '@/assets/globe-data.json';
+import countries from '@/assets/countries.json';
 
 import type { GlobeInitParams, FrameData } from "@/types.ts";
 
@@ -48,6 +49,30 @@ export const initializeGlobe = ({
     .hexPolygonUseDots(true)
     .hexPolygonColor(() => GLOBE_SETTINGS.COLORS.polygon)
     .atmosphereAltitude(GLOBE_SETTINGS.atmosphereLevel)
+
+  globe
+    .htmlElementsData(Object.entries(countries.countriesCollection))
+    .htmlLat(([, d]: any) => parseFloat(d.coordinates[0]))
+    .htmlLng(([, d]: any) => parseFloat(d.coordinates[1]))
+    .htmlAltitude(0.02)
+    .htmlElement(([iso3, _d]: any) => {
+      const el = document.createElement('button');
+      el.innerHTML = iso3.toUpperCase();
+      el.classList.add(
+        'country-marker',
+        'bg-gray-700',
+        'rounded-lg',
+        'text-white',
+        'p-2',
+        'hidden',
+      );
+
+      el.id = `label-${iso3}`
+      el.addEventListener('mousedown', (event) => {
+        event.preventDefault();
+      });        
+      return el;
+    });
 
   const globeMaterial = new MeshBasicMaterial({
     color: new Color(GLOBE_SETTINGS.COLORS.globe),
