@@ -8,4 +8,4 @@ class Config:
 
     @classmethod
     def get_driver(cls):
-        return GraphDatabase.driver(cls.NEO4J_URI, auth=(cls.NEO4J_USER, cls.NEO4J_PASSWORD))
+      return GraphDatabase.driver(cls.NEO4J_URI, auth=(cls.NEO4J_USER, cls.NEO4J_PASSWORD))
