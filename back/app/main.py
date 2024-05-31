@@ -186,6 +186,96 @@ async def get_neighborhoods_for_bonus():
         return {"data": data}
 
 
+@app.get("/api/metrics/changes_income")
+async def get_metrics_changes_income(order: str = "ASC"):
+    # Consulta para obtener las métricas con los mayores cambios promedio positivos
+    query_positive = """
+    MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+    MATCH (c)-[:IS_PART_OF]->(i:IncomeGroup)
+    WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value, i.name as IncomeGroup
+    ORDER BY Metric, Year
+    WITH Metric, IncomeGroup, collect(Value) AS Values, collect(Year) AS Years
+    WITH Metric, IncomeGroup, apoc.coll.pairsMin(Values) AS Changes, Years
+    UNWIND range(0, size(Changes) - 1) AS i
+    WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year, IncomeGroup
+    WITH Metric, (Change[1] - Change[0]) AS Change, Year, IncomeGroup
+    RETURN Metric, avg(Change) AS AvgChange, Year, IncomeGroup
+    ORDER BY AvgChange DESC
+    LIMIT 3
+    """
+
+    # Consulta para obtener las métricas con los mayores cambios promedio negativos
+    query_negative = """
+    MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+    MATCH (c)-[:IS_PART_OF]->(i:IncomeGroup)
+    WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value, i.name as IncomeGroup
+    ORDER BY Metric, Year
+    WITH Metric, collect(Value) AS Values, collect(Year) AS Years, IncomeGroup
+    WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years, IncomeGroup
+    UNWIND range(0, size(Changes) - 1) AS i
+    WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year, IncomeGroup
+    WITH Metric, (Change[1] - Change[0]) AS Change, Year, IncomeGroup
+    RETURN Metric, avg(Change) AS AvgChange, Year, IncomeGroup
+    ORDER BY AvgChange ASC
+    LIMIT 3
+    """
+
+    try:
+        with driver.session() as session:
+            # Ejecutar la consulta de cambios positivos
+            result_positive = session.run(query_positive)
+            data_positive = [
+                {
+                    "Metric": record["Metric"],
+                    "AvgChange": record["AvgChange"],
+                    "Year": record["Year"],
+                    "IncomeGroup": record["IncomeGroup"],
+                }
+                for record in result_positive
+            ]
+
+            # Ejecutar la consulta de cambios negativos
+            result_negative = session.run(query_negative)
+            data_negative = [
+                {
+                    "Metric": record["Metric"],
+                    "AvgChange": record["AvgChange"],
+                    "Year": record["Year"],
+                    "IncomeGroup": record["IncomeGroup"],
+                }
+                for record in result_negative
+            ]
+
+        # Verificar si no se obtuvieron datos
+        if not data_positive and not data_negative:
+            raise HTTPException(
+                status_code=404, detail="No data retrieved from the database"
+            )
+
+        # Combinar los datos de cambios positivos y negativos
+        combined_data = data_positive + data_negative
+
+        # Ordenar los datos combinados según el parámetro de orden
+        combined_data = sorted(
+            combined_data,
+            key=lambda x: x["AvgChange"],
+            reverse=(order.upper() == "DESC"),
+        )
+
+        # Retornar la respuesta con los datos combinados y el orden
+        return {"data": combined_data, "order": order.upper()}
+    except Exception as e:
+        # Manejo de errores y respuesta con código de estado 500
+        print("Error:", str(e))
+        import traceback
+
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=f"An error occurred while processing the request: {str(e)}",
+        )
+
+
 @app.get("/api/metrics/changes")
 async def get_metrics_changes(order: str = "ASC"):
     # Consulta para obtener las métricas con los mayores cambios promedio positivos
@@ -202,7 +292,7 @@ async def get_metrics_changes(order: str = "ASC"):
     ORDER BY AvgChange DESC
     LIMIT 3
     """
-    
+
     # Consulta para obtener las métricas con los mayores cambios promedio negativos
     query_negative = """
     MATCH (c:Country)-[r:MEASURED]->(m:Metric)
@@ -226,7 +316,7 @@ async def get_metrics_changes(order: str = "ASC"):
                 {
                     "Metric": record["Metric"],
                     "AvgChange": record["AvgChange"],
-                    "Year": record["Year"]
+                    "Year": record["Year"],
                 }
                 for record in result_positive
             ]
@@ -237,7 +327,7 @@ async def get_metrics_changes(order: str = "ASC"):
                 {
                     "Metric": record["Metric"],
                     "AvgChange": record["AvgChange"],
-                    "Year": record["Year"]
+                    "Year": record["Year"],
                 }
                 for record in result_negative
             ]
@@ -252,23 +342,24 @@ async def get_metrics_changes(order: str = "ASC"):
         combined_data = data_positive + data_negative
 
         # Ordenar los datos combinados según el parámetro de orden
-        combined_data = sorted(combined_data, key=lambda x: x["AvgChange"], reverse=(order.upper() == "DESC"))
+        combined_data = sorted(
+            combined_data,
+            key=lambda x: x["AvgChange"],
+            reverse=(order.upper() == "DESC"),
+        )
 
         # Retornar la respuesta con los datos combinados y el orden
-        return {
-            "data": combined_data,
-            "order": order.upper()
-        }
+        return {"data": combined_data, "order": order.upper()}
     except Exception as e:
         # Manejo de errores y respuesta con código de estado 500
         print("Error:", str(e))
         import traceback
+
         traceback.print_exc()
         raise HTTPException(
             status_code=500,
             detail=f"An error occurred while processing the request: {str(e)}",
         )
-
 
 
 # En que regiones se ha avanzado / retrocedido por métrica en mayor / menor medida
