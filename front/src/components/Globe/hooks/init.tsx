@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { GLOBE_SETTINGS } from "../constants";
 import globeData from '@/assets/globe-data.json';
 import countries from '@/assets/countries.json';
+import { regions } from "@/assets/regions";
 
 import type { GlobeInitParams, FrameData } from "@/types.ts";
 
@@ -23,22 +24,11 @@ export const initializeGlobe = ({
   globeData, 
   windowCenter,
   mousePosition,
+  setOpenModal,
 }: GlobeInitParams) => {
   const container = containerRef.current;
   if (!container) return;
   container.innerHTML = "";
-
-  const renderers = [new WebGLRenderer(), new CSS2DRenderer()];
-
-  renderers.forEach((r, idx) => {
-    r.setSize(window.innerWidth, window.innerHeight);
-    if (idx > 0) {
-      r.domElement.style.position = "absolute";
-      r.domElement.style.top = "0px";
-      r.domElement.style.pointerEvents = "none";
-    }
-    container.appendChild(r.domElement);
-  });
 
   const scene = new Scene();
 
@@ -62,14 +52,16 @@ export const initializeGlobe = ({
         'country-marker',
         'bg-gray-700',
         'rounded-lg',
+        'hover:bg-blue-800',
         'text-white',
         'p-2',
         'hidden',
       );
 
       el.id = `label-${iso3}`
-      el.addEventListener('mousedown', (event) => {
+      el.addEventListener('click', (event) => {
         event.preventDefault();
+        setOpenModal(iso3);
       });        
       return el;
     });
@@ -99,6 +91,19 @@ export const initializeGlobe = ({
 
   scene.add(camera);
 
+  const renderers = [new WebGLRenderer(), new CSS2DRenderer()];
+
+  renderers.forEach((r, idx) => {
+    r.setSize(window.innerWidth, window.innerHeight);
+    if (idx > 0) {
+      r.domElement.style.position = "absolute";
+      r.domElement.style.top = "0px";
+      r.domElement.style.pointerEvents = "none";
+    }
+    container.appendChild(r.domElement);
+  });
+
+
   const controls = new OrbitControls(camera, renderers[0].domElement);
   controls.enableDamping = true;
   controls.enablePan = false;
@@ -106,6 +111,8 @@ export const initializeGlobe = ({
   controls.maxDistance = 300;
   controls.rotateSpeed = 0.4;
   controls.zoomSpeed = 1;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.3;
 
   globe.setPointOfView(camera.position, globe.position);
   controls.addEventListener("change", () =>
@@ -135,10 +142,11 @@ export const initializeGlobe = ({
 export const useGlobe = (
   containerRef: React.MutableRefObject<any>,
   setFrameData: null | ((d: FrameData) => any),
-  setGlobe: null | ((d: FrameData["globe"]) => any)
+  setGlobe: null | ((d: FrameData["globe"]) => any),
+  setOpenModal: (iso3: string) => void,
 ) => {
   useEffect(() => {
-    if (!containerRef.current || !setFrameData || !setGlobe)
+    if (!containerRef.current || !setFrameData || !setGlobe || !setOpenModal)
       return;
   
     const initData = initializeGlobe({
@@ -146,13 +154,13 @@ export const useGlobe = (
       globeData,
       windowCenter: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
       mousePosition: { x: 0, y: 0 },
+      setOpenModal,
     });
   
     if (initData) {
       setFrameData(initData as FrameData)
       setGlobe(initData.globe)
     }
-
-  }, [containerRef, setFrameData, setGlobe]);
+  }, [containerRef, setFrameData, setGlobe, setOpenModal]);
 }
 
