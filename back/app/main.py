@@ -117,12 +117,12 @@ async def execute_cypher(request: Request):
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/api/bonus")
 async def get_neighborhoods_for_bonus():
     with driver.session() as session:
 
-        # First Subquery: Get countries with lowest, median, and highest metric values
-        query1 = """
+        query = """
             MATCH (c:Country)-[m:MEASURED]->(metric:Metric)
             WHERE m.year >= '1991' AND m.year <= '2018'
             WITH c, metric, m.year AS year, toFloat(m.value) AS value
@@ -178,10 +178,21 @@ async def get_neighborhoods_for_bonus():
                    neighbor.name AS neighbor_country, neighbor_avg_percentage_change
             ORDER BY main_country, neighbor_avg_percentage_change DESC
         """
-        result = session.run(query1)
+        result = session.run(query)
         records = [record.data() for record in result]
+        data = {}
+        for record in records:
+            if record["main_country"] not in data:
+                data[record["main_country"]] = {
+                    "main_country_percentage": record["main_avg_percentage_change"],
+                    "neighboring_countries": {},
+                }
+            data[record["main_country"]]["neighboring_countries"][
+                record["neighbor_country"]
+            ] = record["neighbor_avg_percentage_change"]
 
-        return {"data": records}
+        return {"data": data}
+
 
 @app.get("/api/metrics/changes")
 async def get_metrics_changes(order: str = "ASC"):
@@ -255,16 +266,19 @@ async def get_metrics_changes(order: str = "ASC"):
             detail=f"An error occurred while processing the request: {str(e)}",
         )
 
+
 # En que regiones se ha avanzado / retrocedido por métrica en mayor / menor medida
 @app.get("/api/metrics/by-region")
-async def get_regions_by_metric(strategy: Optional[str] = 'relative', order: Optional[str] = 'DESC'):
-    if order.upper() not in ['ASC', 'DESC']:
+async def get_regions_by_metric(
+    strategy: Optional[str] = "relative", order: Optional[str] = "DESC"
+):
+    if order.upper() not in ["ASC", "DESC"]:
         raise HTTPException(status_code=400, detail="Invalid ordering")
-    
+
     query = None
 
-    if strategy == 'relative':
-      query = f"""
+    if strategy == "relative":
+        query = f"""
       MATCH (reg:Region)<-[:IS_IN]-(c:Country)-[r:MEASURED]->(m:Metric)
       WITH reg, c, m, MIN(r.year) AS firstYear, MAX(r.year) AS lastYear
 
@@ -288,8 +302,8 @@ async def get_regions_by_metric(strategy: Optional[str] = 'relative', order: Opt
       ORDER BY metric
       """
 
-    elif strategy == 'absolute':
-      query = f"""
+    elif strategy == "absolute":
+        query = f"""
       MATCH (reg:Region)<-[:IS_IN]-(c:Country)-[r:MEASURED]->(m:Metric)
       WITH reg, c, m, MAX(r.year) AS lastYear
 
@@ -304,32 +318,35 @@ async def get_regions_by_metric(strategy: Optional[str] = 'relative', order: Opt
       ORDER BY metric
       """
     else:
-      raise HTTPException(status_code=400, detail="Invalid strategy")
+        raise HTTPException(status_code=400, detail="Invalid strategy")
 
     try:
-      with driver.session() as session:
-        result = session.run(query)
-        return {
-            "data": [record.data() for record in result],
-            "order": order.upper(),
-            "strategy": strategy,
-            "query": query
-        }
+        with driver.session() as session:
+            result = session.run(query)
+            return {
+                "data": [record.data() for record in result],
+                "order": order.upper(),
+                "strategy": strategy,
+                "query": query,
+            }
     except Exception as e:
-      raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
-      session.close()
-        
-# Que países han avanzado / retrocedido comparado vs otros en su región (ahorita me vv la región xd)	
+        session.close()
+
+
+# Que países han avanzado / retrocedido comparado vs otros en su región
 @app.get("/api/metrics/by-country")
-async def get_countries_by_metric(strategy: Optional[str] = 'relative', order: Optional[str] = 'DESC'):
-    if order.upper() not in ['ASC', 'DESC']:
+async def get_countries_by_metric(
+    strategy: Optional[str] = "relative", order: Optional[str] = "DESC"
+):
+    if order.upper() not in ["ASC", "DESC"]:
         raise HTTPException(status_code=400, detail="Invalid ordering")
-    
+
     query = None
 
-    if strategy == 'relative':
-      query = f"""
+    if strategy == "relative":
+        query = f"""
       MATCH (c:Country)-[r:MEASURED]->(m:Metric)
       WITH c, m, MIN(r.year) AS firstYear, MAX(r.year) AS lastYear
 
@@ -350,8 +367,8 @@ async def get_countries_by_metric(strategy: Optional[str] = 'relative', order: O
       RETURN metric, countryChanges[0].country AS country, countryChanges[0].index AS value
       ORDER BY metric
       """
-    elif strategy == 'absolute':
-      query = f"""
+    elif strategy == "absolute":
+        query = f"""
       MATCH (c:Country)-[r:MEASURED]->(m:Metric)
       WITH c, m, MAX(r.year) AS lastYear
 
@@ -364,7 +381,7 @@ async def get_countries_by_metric(strategy: Optional[str] = 'relative', order: O
       ORDER BY metric
       """
     else:
-      raise HTTPException(status_code=400, detail="Invalid strategy")
+        raise HTTPException(status_code=400, detail="Invalid strategy")
 
     try:
         with driver.session() as session:
@@ -374,20 +391,21 @@ async def get_countries_by_metric(strategy: Optional[str] = 'relative', order: O
                 "data": [record.data() for record in result],
                 "order": order.upper(),
                 "strategy": strategy,
-                "query": query
+                "query": query,
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
-       session.close()
+        session.close()
+
 
 # En su opinión, ¿Cuáles serían los 10 países a tomar como referencia?
 # En su opinión, ¿Cuáles serían los 10 países donde más oportunidad hay? Y ¿qué les beneficiaría más?
 @app.get("/api/metrics/top-countries")
-async def get_top_countries(order: Optional[str] = 'DESC'):
-    if order.upper() not in ['ASC', 'DESC']:
+async def get_top_countries(order: Optional[str] = "DESC"):
+    if order.upper() not in ["ASC", "DESC"]:
         raise HTTPException(status_code=400, detail="Invalid ordering")
-    
+
     query = f"""
     MATCH (:Country)-[measured:MEASURED]->(metric:Metric)
     WHERE measured.value IS NOT NULL
@@ -413,15 +431,15 @@ async def get_top_countries(order: Optional[str] = 'DESC'):
     ORDER BY value {order.upper()}
     LIMIT 10
     """
-    
+
     try:
-      with driver.session() as session:
-        result = session.run(query)
-        return {
-            "data": [record.data() for record in result],
-            "order": order.upper()
-        }
+        with driver.session() as session:
+            result = session.run(query)
+            return {
+                "data": [record.data() for record in result],
+                "order": order.upper(),
+            }
     except Exception as e:
-      raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
-      session.close()
+        session.close()
