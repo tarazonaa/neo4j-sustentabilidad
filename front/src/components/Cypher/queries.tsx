@@ -25,8 +25,8 @@ export const questions = [
   {
     question:
       "¿Qué métricas son las que más han avanzado / retrocedido globalmente?",
-    endpoint: "/api/metrics/by-metric",
-    returns: ["metrics"],
+    endpoint: "/api/metrics/changes",
+    returns: ["metrics"], // Didn't know wtf
   },
   {
     question: "¿Cuáles serían los 10 países a tomar como referencia?",
@@ -41,8 +41,8 @@ export const questions = [
   },
   {
     question: "La distancia entre países, ¿afecta en algo los resultados?",
-    endpoint: "/api/idk",
-    returns: ["idk"],
+    endpoint: "/api/bonus",
+    returns: ["countries"], // Maybe needs its own handler?
   },
 ];
 

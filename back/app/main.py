@@ -1,10 +1,13 @@
+import math
+from typing import List, Optional
+
+import pandas as pd
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from neo4j import GraphDatabase
 from pydantic import BaseModel
-from typing import List, Optional
+
 from app.config import Config
-from fastapi.middleware.cors import CORSMiddleware
-import pandas as pd
 
 app = FastAPI()
 
@@ -18,6 +21,7 @@ app.add_middleware(
 
 driver = Config.get_driver()
 
+
 # Close the driver connection when the app is shutting down
 
 
@@ -25,12 +29,14 @@ driver = Config.get_driver()
 def shutdown_event():
     driver.close()
 
+
 # Root endpoint for testing
 
 
 @app.get("/")
 async def root():
     return {"message": "Big testing"}
+
 
 # Endpoint to get country data
 
@@ -43,6 +49,7 @@ async def get_countries():
         countries = [record.data() for record in result]
     return {"countries": countries}
 
+
 # Endpoint to get region data
 
 
@@ -53,6 +60,7 @@ async def get_regions():
         result = session.run(query)
         regions = [record.data() for record in result]
     return {"regions": regions}
+
 
 # Endpoint to get metric data
 
@@ -65,6 +73,7 @@ async def get_metrics():
         metrics = [record.data() for record in result]
     return {"metrics": metrics}
 
+
 # Endpoint to get income group data
 
 
@@ -76,6 +85,7 @@ async def get_income_groups():
         income_groups = [record.data() for record in result]
     return {"income_groups": income_groups}
 
+
 # Endpoint to get topic data
 
 
@@ -86,6 +96,7 @@ async def get_topics():
         result = session.run(query)
         topics = [record.data() for record in result]
     return {"topics": topics}
+
 
 # Endpoint to execute Cypher queries
 
@@ -106,9 +117,73 @@ async def execute_cypher(request: Request):
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
-# ¿Qué métricas son las que más han avanzado / retrocedido globalmente?
+@app.get("/api/bonus")
+async def get_neighborhoods_for_bonus():
+    with driver.session() as session:
+
+        # First Subquery: Get countries with lowest, median, and highest metric values
+        query1 = """
+            MATCH (c:Country)-[m:MEASURED]->(metric:Metric)
+            WHERE m.year >= '1991' AND m.year <= '2018'
+            WITH c, metric, m.year AS year, toFloat(m.value) AS value
+            ORDER BY c.name, metric.name, year
+            WITH c, metric.name AS metric_name, COLLECT(year) AS years, COLLECT(value) AS values
+            WHERE SIZE(values) = (2018 - 1991 + 1)
+            UNWIND RANGE(1, SIZE(values)-1) AS i
+            WITH c, metric_name, values[i] AS current_value, values[i-1] AS previous_value
+            WHERE previous_value <> 0 
+            WITH c, metric_name, (current_value - previous_value) / previous_value * 100 AS yearly_percentage_change
+            WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity'  // Filter out NaNs and Infinities
+            WITH c, AVG(yearly_percentage_change) AS avg_percentage_change
+            WITH c.name AS country, avg_percentage_change
+            ORDER BY avg_percentage_change DESC
+
+            WITH COLLECT({country: country, avg_percentage_change: avg_percentage_change}) AS results
+            WITH results, SIZE(results) AS total
+            WITH results, total, 
+                 results[0] AS best_1,
+                 results[1] as best_2,
+                 results[2] as best_3, 
+                 results[toInteger(total / 2)] AS middle_1,
+                 results[toInteger(total/2) + 1] as middle_2, 
+                 results[toInteger(total/2) - 1] as middle_3, 
+                 results[total - 1] AS lowest_1,
+                 results[total - 2] AS lowest_2,
+                 results[total - 3] AS lowest_3
+
+            UNWIND [best_1, best_2, best_3, middle_1, middle_2, middle_3, lowest_1, lowest_2, lowest_3] AS main
+            MATCH (start:Country {name: main.country})
+            CALL apoc.path.subgraphNodes(start, {
+              relationshipFilter: "NEIGHBORS",
+              minLevel: 1,
+              maxLevel: 2,
+              limit: 100
+            }) YIELD node AS neighbor
+            WITH main, neighbor
+            MATCH (neighbor)-[m:MEASURED]->(metric:Metric)
+            WHERE m.year >= '1991' AND m.year <= '2018'
+            WITH main, neighbor, metric, m.year AS year, toFloat(m.value) AS value
+            ORDER BY neighbor.name, metric.name, year
+            WITH main, neighbor, metric.name AS metric_name, COLLECT(year) AS years, COLLECT(value) AS values
+            WHERE SIZE(values) = (2018 - 1991 + 1)
+            UNWIND RANGE(1, SIZE(values)-1) AS i
+            WITH main, neighbor, values[i] AS current_value, values[i-1] AS previous_value
+            WHERE previous_value <> 0
+            WITH main, neighbor, (current_value - previous_value) / previous_value * 100 AS yearly_percentage_change
+            WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity'  // Filter out NaNs and Infinities
+            WITH main, neighbor, AVG(yearly_percentage_change) AS neighbor_avg_percentage_change
+
+            RETURN main.country AS main_country, main.avg_percentage_change AS main_avg_percentage_change,
+                   neighbor.name AS neighbor_country, neighbor_avg_percentage_change
+            ORDER BY main_country, neighbor_avg_percentage_change DESC
+        """
+        result = session.run(query1)
+        records = [record.data() for record in result]
+
+        return {"data": records}
+
 @app.get("/api/metrics/changes")
-async def get_metrics_changes(order: str = 'ASC'):
+async def get_metrics_changes(order: str = "ASC"):
     query = """
     MATCH (c:Country)-[r:MEASURED]->(m:Metric)
     RETURN m.name AS Metric, r.year AS Year, r.value AS Value
@@ -120,66 +195,64 @@ async def get_metrics_changes(order: str = 'ASC'):
     try:
         with driver.session() as session:
             result = session.run(query)
-            data = [(record["Metric"], record["Year"], record["Value"])
-                    for record in result]
+            data = [
+                (record["Metric"], record["Year"], record["Value"]) for record in result
+            ]
 
         print("Fetched data:", data)
 
         if not data:
             raise HTTPException(
-                status_code=404, detail="No data retrieved from the database")
+                status_code=404, detail="No data retrieved from the database"
+            )
 
         # Convert data to a DataFrame
         df = pd.DataFrame(data, columns=["Metric", "Year", "Value"])
 
         # Convert Year and Value to appropriate data types
-        df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
-        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+        df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
+        df["Value"] = pd.to_numeric(df["Value"], errors="coerce")
 
         # Drop rows with invalid data
-        df = df.dropna(subset=['Year', 'Value'])
+        df = df.dropna(subset=["Year", "Value"])
 
         if df.empty:
-            raise HTTPException(
-                status_code=404, detail="No data found in DataFrame")
+            raise HTTPException(status_code=404, detail="No data found in DataFrame")
 
         # Check for duplicates and aggregate values if needed
-        df = df.groupby(['Metric', 'Year']).agg(
-            {'Value': 'mean'}).reset_index()
+        df = df.groupby(["Metric", "Year"]).agg({"Value": "mean"}).reset_index()
 
         # Calculate the change for each metric
-        df['Change'] = df.groupby('Metric')['Value'].diff()
+        df["Change"] = df.groupby("Metric")["Value"].diff()
 
         # Handle potential outliers
-        q1 = df['Change'].quantile(0.25)
-        q3 = df['Change'].quantile(0.75)
+        q1 = df["Change"].quantile(0.25)
+        q3 = df["Change"].quantile(0.75)
         iqr = q3 - q1
         lower_bound = q1 - 1.5 * iqr
         upper_bound = q3 + 1.5 * iqr
 
         # Filter out outliers
-        df_filtered = df[(df['Change'] >= lower_bound) &
-                         (df['Change'] <= upper_bound)]
+        df_filtered = df[(df["Change"] >= lower_bound) & (df["Change"] <= upper_bound)]
 
         # Sort the DataFrame by change
-        ascending_order = order.upper() == 'ASC'
-        sorted_df = df_filtered.sort_values(
-            by='Change', ascending=ascending_order)
+        ascending_order = order.upper() == "ASC"
+        sorted_df = df_filtered.sort_values(by="Change", ascending=ascending_order)
 
         # sorted DataFrame
         print("Sorted DataFrame:", sorted_df)
 
-        return {
-            "data": sorted_df.to_dict(orient='records'),
-            "order": order.upper()
-        }
+        return {"data": sorted_df.to_dict(orient="records"), "order": order.upper()}
     except Exception as e:
 
         print("Error:", str(e))
         import traceback
+
         traceback.print_exc()
         raise HTTPException(
-            status_code=500, detail=f"An error occurred while processing the request: {str(e)}")
+            status_code=500,
+            detail=f"An error occurred while processing the request: {str(e)}",
+        )
 
 # En que regiones se ha avanzado / retrocedido por métrica en mayor / menor medida
 @app.get("/api/metrics/by-region")
