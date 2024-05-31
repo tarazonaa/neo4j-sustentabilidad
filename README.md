@@ -87,14 +87,68 @@ ORDER BY metric
 
 ### 3. ¿Qué métricas son las que más han avanzado / retrocedido globalmente?
 
+Poitivos:
 ```cypher
+MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value
+ORDER BY Metric, Year
+WITH Metric, collect(Value) AS Values, collect(Year) AS Years
+WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years
+UNWIND range(0, size(Changes) - 1) AS i
+WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year
+WITH Metric, (Change[1] - Change[0]) AS Change, Year
+RETURN Metric, avg(Change) AS AvgChange, Year
+ORDER BY AvgChange DESC
+LIMIT 3
+```
 
+Negativos:
+```cypher
+MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value
+ORDER BY Metric, Year
+WITH Metric, collect(Value) AS Values, collect(Year) AS Years
+WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years
+UNWIND range(0, size(Changes) - 1) AS i
+WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year
+WITH Metric, (Change[1] - Change[0]) AS Change, Year
+RETURN Metric, avg(Change) AS AvgChange, Year
+ORDER BY AvgChange ASC
+LIMIT 3
 ```
 
 ### 4. Estos insights, ¿varían dependiendo del income group?
 
+Positivos:
 ```cypher
+MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+MATCH (c)-[:IS_PART_OF]->(i:IncomeGroup)
+WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value, i.name as IncomeGroup
+ORDER BY Metric, Year
+WITH Metric, IncomeGroup, collect(Value) AS Values, collect(Year) AS Years
+WITH Metric, IncomeGroup, apoc.coll.pairsMin(Values) AS Changes, Years
+UNWIND range(0, size(Changes) - 1) AS i
+WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year, IncomeGroup
+WITH Metric, (Change[1] - Change[0]) AS Change, Year, IncomeGroup
+RETURN Metric, avg(Change) AS AvgChange, Year, IncomeGroup
+ORDER BY AvgChange DESC
+LIMIT 3
+```
 
+Negativos:
+```cypher
+MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+MATCH (c)-[:IS_PART_OF]->(i:IncomeGroup)
+WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value, i.name as IncomeGroup
+ORDER BY Metric, Year
+WITH Metric, collect(Value) AS Values, collect(Year) AS Years, IncomeGroup
+WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years, IncomeGroup
+UNWIND range(0, size(Changes) - 1) AS i
+WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year, IncomeGroup
+WITH Metric, (Change[1] - Change[0]) AS Change, Year, IncomeGroup
+RETURN Metric, avg(Change) AS AvgChange, Year, IncomeGroup
+ORDER BY AvgChange ASC
+LIMIT 3
 ```
 
 ### 5. En su opinión, ¿Cuáles serían los 10 países a tomar como referencia?
