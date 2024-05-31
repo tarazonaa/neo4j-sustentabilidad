@@ -118,9 +118,8 @@ async def get_neighborhoods_for_bonus():
             WITH c, metric_name, values[i] AS current_value, values[i-1] AS previous_value
             WHERE previous_value <> 0 
             WITH c, metric_name, (current_value - previous_value) / previous_value * 100 AS yearly_percentage_change
-            WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity'  // Filter out NaNs and Infinities
-            WITH c, AVG(yearly_percentage_change) AS avg_percentage_change
-            WITH c.name AS country, avg_percentage_change
+            WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity' 
+            WITH c.name as country, AVG(yearly_percentage_change) AS avg_percentage_change
             ORDER BY avg_percentage_change DESC
 
             WITH COLLECT({country: country, avg_percentage_change: avg_percentage_change}) AS results
@@ -138,12 +137,14 @@ async def get_neighborhoods_for_bonus():
 
             UNWIND [best_1, best_2, best_3, middle_1, middle_2, middle_3, lowest_1, lowest_2, lowest_3] AS main
             MATCH (start:Country {name: main.country})
+
             CALL apoc.path.subgraphNodes(start, {
               relationshipFilter: "NEIGHBORS",
               minLevel: 1,
               maxLevel: 2,
               limit: 100
             }) YIELD node AS neighbor
+
             WITH main, neighbor
             MATCH (neighbor)-[m:MEASURED]->(metric:Metric)
             WHERE m.year >= '1991' AND m.year <= '2018'
@@ -155,7 +156,7 @@ async def get_neighborhoods_for_bonus():
             WITH main, neighbor, values[i] AS current_value, values[i-1] AS previous_value
             WHERE previous_value <> 0
             WITH main, neighbor, (current_value - previous_value) / previous_value * 100 AS yearly_percentage_change
-            WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity'  // Filter out NaNs and Infinities
+            WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity'
             WITH main, neighbor, AVG(yearly_percentage_change) AS neighbor_avg_percentage_change
 
             RETURN main.country AS main_country, main.avg_percentage_change AS main_avg_percentage_change,
