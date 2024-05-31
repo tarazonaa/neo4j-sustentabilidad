@@ -15,9 +15,16 @@ export interface GlobeInitParams {
   globeData: any;
   windowCenter: { x: number; y: number };
   mousePosition: { x: number; y: number };
+  setOpenModal: any;
 }
 
 export interface GlobeContextProps {
   globe: null | ThreeGlobe;
   setGlobe: null | ((d: ThreeGlobe) => void);
+  regionData: null | any;
+  setRegionData: null | ((d: any) => void);
+  countryData: null | any;
+  setCountryData: null | ((d: any) => void);
+  openModal: any;
+  setOpenModal: any;
 }

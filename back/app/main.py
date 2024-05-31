@@ -23,18 +23,24 @@ driver = Config.get_driver()
 
 
 # Close the driver connection when the app is shutting down
+
+
 @app.on_event("shutdown")
 def shutdown_event():
     driver.close()
 
 
 # Root endpoint for testing
+
+
 @app.get("/")
 async def root():
     return {"message": "Big testing"}
 
 
 # Endpoint to get country data
+
+
 @app.get("/api/countries")
 async def get_countries():
     query = "MATCH (c:Country) RETURN c.code2 AS code2, c.code AS code, c.notes AS notes, c.name AS name, c.currency AS currency LIMIT 10"
@@ -45,6 +51,8 @@ async def get_countries():
 
 
 # Endpoint to get region data
+
+
 @app.get("/api/regions")
 async def get_regions():
     query = "MATCH (r:Region) RETURN r.name AS name, r.id AS id LIMIT 10"
@@ -55,6 +63,8 @@ async def get_regions():
 
 
 # Endpoint to get metric data
+
+
 @app.get("/api/metrics")
 async def get_metrics():
     query = "MATCH (m:Metric) RETURN m.code AS code, m.name AS name, m.periodicity AS periodicity, m.definition AS definition LIMIT 10"
@@ -65,6 +75,8 @@ async def get_metrics():
 
 
 # Endpoint to get income group data
+
+
 @app.get("/api/income-groups")
 async def get_income_groups():
     query = "MATCH (i:IncomeGroup) RETURN i.name AS name, i.id AS id LIMIT 10"
@@ -75,6 +87,8 @@ async def get_income_groups():
 
 
 # Endpoint to get topic data
+
+
 @app.get("/api/topics")
 async def get_topics():
     query = "MATCH (t:Topic) RETURN t.topic AS topic, t.id AS id LIMIT 10"
@@ -85,6 +99,8 @@ async def get_topics():
 
 
 # Endpoint to execute Cypher queries
+
+
 @app.post("/api/execute-cypher")
 async def execute_cypher(request: Request):
     body = await request.json()
@@ -100,7 +116,6 @@ async def execute_cypher(request: Request):
             return {"result": records}
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/bonus")
 async def get_neighborhoods_for_bonus():
@@ -166,7 +181,6 @@ async def get_neighborhoods_for_bonus():
         records = [record.data() for record in result]
 
         return {"data": records}
-
 
 @app.get("/api/metrics/changes")
 async def get_metrics_changes(order: str = "ASC"):
@@ -239,3 +253,174 @@ async def get_metrics_changes(order: str = "ASC"):
             status_code=500,
             detail=f"An error occurred while processing the request: {str(e)}",
         )
+
+# En que regiones se ha avanzado / retrocedido por métrica en mayor / menor medida
+@app.get("/api/metrics/by-region")
+async def get_regions_by_metric(strategy: Optional[str] = 'relative', order: Optional[str] = 'DESC'):
+    if order.upper() not in ['ASC', 'DESC']:
+        raise HTTPException(status_code=400, detail="Invalid ordering")
+    
+    query = None
+
+    if strategy == 'relative':
+      query = f"""
+      MATCH (reg:Region)<-[:IS_IN]-(c:Country)-[r:MEASURED]->(m:Metric)
+      WITH reg, c, m, MIN(r.year) AS firstYear, MAX(r.year) AS lastYear
+
+      MATCH (reg)<-[:IS_IN]-(c)-[first:MEASURED {{year: firstYear}}]->(m)
+      WITH reg, c, m, firstYear, toFloat(first.value) AS firstValue, lastYear
+
+      MATCH (reg)<-[:IS_IN]-(c)-[last:MEASURED {{year: lastYear}}]->(m)
+      WITH reg, c, m, firstYear, firstValue, lastYear, toFloat(last.value) AS lastValue
+
+      WITH reg, c, m, firstYear, firstValue, lastYear, lastValue,
+        CASE 
+          WHEN firstValue <> 0.0 THEN (lastValue - firstValue) * m.multiplier / firstValue 
+          ELSE 0 
+        END AS idx
+
+      WITH reg, m, AVG(idx) AS averageIndicator
+      ORDER BY m.name, averageIndicator {order.upper()}
+
+      WITH m.name AS metric, COLLECT({{region: reg.name, avgIndicator: averageIndicator * m.multiplier}}) AS regionChanges
+      RETURN metric, regionChanges[0].region AS region, regionChanges[0].avgIndicator AS value
+      ORDER BY metric
+      """
+
+    elif strategy == 'absolute':
+      query = f"""
+      MATCH (reg:Region)<-[:IS_IN]-(c:Country)-[r:MEASURED]->(m:Metric)
+      WITH reg, c, m, MAX(r.year) AS lastYear
+
+      MATCH (reg)<-[:IS_IN]-(c)-[last:MEASURED {{year: lastYear}}]->(m)
+      WITH reg, c, m, toFloat(last.value) AS lastValue
+
+      WITH reg, m, AVG(lastValue * m.multiplier) AS averageIndicator
+      ORDER BY m.name, averageIndicator {order.upper()}
+
+      WITH m.name AS metric, COLLECT({{region: reg.name, avgIndicator: averageIndicator * m.multiplier}}) AS regionChanges
+      RETURN metric, regionChanges[0].region AS region, regionChanges[0].avgIndicator AS value
+      ORDER BY metric
+      """
+    else:
+      raise HTTPException(status_code=400, detail="Invalid strategy")
+
+    try:
+      with driver.session() as session:
+        result = session.run(query)
+        return {
+            "data": [record.data() for record in result],
+            "order": order.upper(),
+            "strategy": strategy,
+            "query": query
+        }
+    except Exception as e:
+      raise HTTPException(status_code=500, detail=str(e))
+    finally:
+      session.close()
+        
+# Que países han avanzado / retrocedido comparado vs otros en su región (ahorita me vv la región xd)	
+@app.get("/api/metrics/by-country")
+async def get_countries_by_metric(strategy: Optional[str] = 'relative', order: Optional[str] = 'DESC'):
+    if order.upper() not in ['ASC', 'DESC']:
+        raise HTTPException(status_code=400, detail="Invalid ordering")
+    
+    query = None
+
+    if strategy == 'relative':
+      query = f"""
+      MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+      WITH c, m, MIN(r.year) AS firstYear, MAX(r.year) AS lastYear
+
+      MATCH (c)-[first:MEASURED {{year: firstYear}}]->(m)
+      WITH c, m, firstYear, toFloat(first.value) AS firstValue, lastYear
+
+      MATCH (c)-[last:MEASURED {{year: lastYear}}]->(m)
+      WITH c, m, firstYear, firstValue, lastYear, toFloat(last.value) AS lastValue
+
+      WITH c, m, firstYear, firstValue, lastYear, lastValue,
+        CASE 
+          WHEN firstValue <> 0.0 THEN (lastValue - firstValue) * m.multiplier / firstValue 
+          ELSE 0 
+        END AS idx
+      ORDER BY m.name, idx {order.upper()}
+        
+      WITH m.name AS metric, COLLECT({{country: c.code, index: idx * m.multiplier}}) AS countryChanges
+      RETURN metric, countryChanges[0].country AS country, countryChanges[0].index AS value
+      ORDER BY metric
+      """
+    elif strategy == 'absolute':
+      query = f"""
+      MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+      WITH c, m, MAX(r.year) AS lastYear
+
+      MATCH (c)-[last:MEASURED {{year: lastYear}}]->(m)
+      WITH c, m, toFloat(last.value) AS lastValue
+      ORDER BY m.name, lastValue {order.upper()}
+
+      WITH m.name AS metric, COLLECT({{country: c.code, value: lastValue * m.multiplier}}) AS countryChanges
+      RETURN metric, countryChanges[0].country AS country, countryChanges[0].value AS value
+      ORDER BY metric
+      """
+    else:
+      raise HTTPException(status_code=400, detail="Invalid strategy")
+
+    try:
+        with driver.session() as session:
+            result = session.run(query)
+            print(result)
+            return {
+                "data": [record.data() for record in result],
+                "order": order.upper(),
+                "strategy": strategy,
+                "query": query
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+       session.close()
+
+# En su opinión, ¿Cuáles serían los 10 países a tomar como referencia?
+# En su opinión, ¿Cuáles serían los 10 países donde más oportunidad hay? Y ¿qué les beneficiaría más?
+@app.get("/api/metrics/top-countries")
+async def get_top_countries(order: Optional[str] = 'DESC'):
+    if order.upper() not in ['ASC', 'DESC']:
+        raise HTTPException(status_code=400, detail="Invalid ordering")
+    
+    query = f"""
+    MATCH (:Country)-[measured:MEASURED]->(metric:Metric)
+    WHERE measured.value IS NOT NULL
+    WITH metric, toFloat(measured.value) AS numericValue
+
+    WITH metric,
+      min(numericValue * metric.multiplier) AS minValue,
+      max(numericValue * metric.multiplier) AS maxValue
+
+    CALL {{
+      WITH metric, minValue, maxValue
+
+      MATCH (c:Country)-[m:MEASURED]->(metric)
+      WHERE m.value IS NOT NULL
+      WITH c, metric, toFloat(m.value) AS value, minValue, maxValue,
+        toFloat(metric.multiplier) AS multiplier
+
+      RETURN c, metric AS met, ((value * multiplier - minValue) / (maxValue - minValue)) AS normalizedValue
+    }}
+
+    WITH c, AVG(normalizedValue) AS averageNormalizedValue
+    RETURN c.code AS country, AVG(averageNormalizedValue) AS value
+    ORDER BY value {order.upper()}
+    LIMIT 10
+    """
+    
+    try:
+      with driver.session() as session:
+        result = session.run(query)
+        return {
+            "data": [record.data() for record in result],
+            "order": order.upper()
+        }
+    except Exception as e:
+      raise HTTPException(status_code=500, detail=str(e))
+    finally:
+      session.close()

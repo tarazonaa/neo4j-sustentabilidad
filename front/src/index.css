@@ -76,3 +76,35 @@ body {
   color: hsl(var(--foreground));
   height: 100dvh;
 }
+
+.country-marker, .country-marker-indicator {
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color .2s ease-in-out;
+}
+
+.country-marker-indicator {
+  cursor: auto !important;
+}
+
+.country-marker-indicator:hover {
+  height: auto;
+}
+
+.country-marker-indicator:hover span, .country-marker-indicator:focus-visible span {
+  display: block;
+}
+
+.country-marker:hover, .country-marker.disabled, .country-marker-indicator:hover {
+  z-index: 200 !important;
+}
+
+.country-marker:focus-visible, .country-marker-indicator:focus-visible {
+  outline: none !important;
+  z-index: 200 !important;
+  height: auto;
+}
+
+.country-marker.disabled {
+  cursor: not-allowed;
+}
