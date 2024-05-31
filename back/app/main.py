@@ -196,75 +196,87 @@ async def get_neighborhoods_for_bonus():
 
 @app.get("/api/metrics/changes")
 async def get_metrics_changes(order: str = "ASC"):
-    query = """
+    # Consulta para obtener las métricas con los mayores cambios promedio positivos
+    query_positive = """
     MATCH (c:Country)-[r:MEASURED]->(m:Metric)
-    RETURN m.name AS Metric, r.year AS Year, r.value AS Value
-    ORDER BY m.name, r.year
+    WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value
+    ORDER BY Metric, Year
+    WITH Metric, collect(Value) AS Values, collect(Year) AS Years
+    WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years
+    UNWIND range(0, size(Changes) - 1) AS i
+    WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year
+    WITH Metric, (Change[1] - Change[0]) AS Change, Year
+    RETURN Metric, avg(Change) AS AvgChange, Year
+    ORDER BY AvgChange DESC
+    LIMIT 3
     """
-
-    # We can limit it with ejemplo LIMIT 10
+    
+    # Consulta para obtener las métricas con los mayores cambios promedio negativos
+    query_negative = """
+    MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+    WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value
+    ORDER BY Metric, Year
+    WITH Metric, collect(Value) AS Values, collect(Year) AS Years
+    WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years
+    UNWIND range(0, size(Changes) - 1) AS i
+    WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year
+    WITH Metric, (Change[1] - Change[0]) AS Change, Year
+    RETURN Metric, avg(Change) AS AvgChange, Year
+    ORDER BY AvgChange ASC
+    LIMIT 3
+    """
 
     try:
         with driver.session() as session:
-            result = session.run(query)
-            data = [
-                (record["Metric"], record["Year"], record["Value"]) for record in result
+            # Ejecutar la consulta de cambios positivos
+            result_positive = session.run(query_positive)
+            data_positive = [
+                {
+                    "Metric": record["Metric"],
+                    "AvgChange": record["AvgChange"],
+                    "Year": record["Year"]
+                }
+                for record in result_positive
             ]
 
-        print("Fetched data:", data)
+            # Ejecutar la consulta de cambios negativos
+            result_negative = session.run(query_negative)
+            data_negative = [
+                {
+                    "Metric": record["Metric"],
+                    "AvgChange": record["AvgChange"],
+                    "Year": record["Year"]
+                }
+                for record in result_negative
+            ]
 
-        if not data:
+        # Verificar si no se obtuvieron datos
+        if not data_positive and not data_negative:
             raise HTTPException(
                 status_code=404, detail="No data retrieved from the database"
             )
 
-        # Convert data to a DataFrame
-        df = pd.DataFrame(data, columns=["Metric", "Year", "Value"])
+        # Combinar los datos de cambios positivos y negativos
+        combined_data = data_positive + data_negative
 
-        # Convert Year and Value to appropriate data types
-        df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
-        df["Value"] = pd.to_numeric(df["Value"], errors="coerce")
+        # Ordenar los datos combinados según el parámetro de orden
+        combined_data = sorted(combined_data, key=lambda x: x["AvgChange"], reverse=(order.upper() == "DESC"))
 
-        # Drop rows with invalid data
-        df = df.dropna(subset=["Year", "Value"])
-
-        if df.empty:
-            raise HTTPException(status_code=404, detail="No data found in DataFrame")
-
-        # Check for duplicates and aggregate values if needed
-        df = df.groupby(["Metric", "Year"]).agg({"Value": "mean"}).reset_index()
-
-        # Calculate the change for each metric
-        df["Change"] = df.groupby("Metric")["Value"].diff()
-
-        # Handle potential outliers
-        q1 = df["Change"].quantile(0.25)
-        q3 = df["Change"].quantile(0.75)
-        iqr = q3 - q1
-        lower_bound = q1 - 1.5 * iqr
-        upper_bound = q3 + 1.5 * iqr
-
-        # Filter out outliers
-        df_filtered = df[(df["Change"] >= lower_bound) & (df["Change"] <= upper_bound)]
-
-        # Sort the DataFrame by change
-        ascending_order = order.upper() == "ASC"
-        sorted_df = df_filtered.sort_values(by="Change", ascending=ascending_order)
-
-        # sorted DataFrame
-        print("Sorted DataFrame:", sorted_df)
-
-        return {"data": sorted_df.to_dict(orient="records"), "order": order.upper()}
+        # Retornar la respuesta con los datos combinados y el orden
+        return {
+            "data": combined_data,
+            "order": order.upper()
+        }
     except Exception as e:
-
+        # Manejo de errores y respuesta con código de estado 500
         print("Error:", str(e))
         import traceback
-
         traceback.print_exc()
         raise HTTPException(
             status_code=500,
             detail=f"An error occurred while processing the request: {str(e)}",
         )
+
 
 
 # En que regiones se ha avanzado / retrocedido por métrica en mayor / menor medida
