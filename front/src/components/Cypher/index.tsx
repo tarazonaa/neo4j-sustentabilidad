@@ -16,56 +16,61 @@ import {
   SelectSeparator
 } from "@/components/ui/select";
 
-import * as API from "./queries";
+import {
+  questions,
+  handleQuery
+} from "./queries";
 
 import { GlobeContext } from "@/App";
 import { GLOBE_SETTINGS } from "@/components/Globe/constants";
 
 import type ThreeGlobe from "three-globe";
 
-const queries = [
-  { 
-    value: "MATCH (c:Country) RETURN c", 
-    label: "List countries",
-  },
-  {
-    value: "MATCH (c:Country)-[:NEIGHBOR]->(n:Country) RETURN c, n",
-    label: "List countries and neighbors",
-  },
-]
+const listing = questions.map((q, idx) => ({
+  label: q.question,
+  value: idx,
+}));
 
 export default function CypherSearch() {
-  const [cypher, setCypher] = useState("Run CYPHER");
-  const { globe } = useContext(GlobeContext);
+  const { globe, setRegionData, setCountryData } = useContext(GlobeContext);
+  const [message, setMessage] = useState("Run CYPHER");
 
   const onValueChange = (value: string) => {
     if (value == "")
       return;
 
-    handleQuery({cypher: value, globe});
-    setCypher(value);
+    const idx = parseInt(value);
+
+    setMessage(listing?.[idx].label);
+    
+    handleQuery({
+      id: idx, 
+      globe,
+      setRegionData: setRegionData,
+      setCountryData: setCountryData
+    });
   }
 
   const clear = () => {
+    setMessage("");
     handleClear(globe);
-    setCypher("");
   }
 
   return (
     <div className="w-11/12 flex flex-row gap-2">
-    <Select onValueChange={onValueChange} value={cypher}>
+    <Select onValueChange={onValueChange}>
       <SelectTrigger className="w-11/12 dark text-gray-300 border-gray-500 text-xs">
-        <SelectValue placeholder="Run CYPHER">
-          {cypher}
+        <SelectValue placeholder="Run CYPHER" value={message}>
+          {message}
         </SelectValue>
       </SelectTrigger>
       <SelectContent className="dark border-0 bg-[#14141f]">
         <SelectGroup className="dark">
-          <SelectLabel>Queries</SelectLabel>
+          <SelectLabel>Preguntas</SelectLabel>
           <SelectSeparator/>
-          {queries.map((query) => (
-            <SelectItem id={query.label} key={query.value} value={query.value}>
-              {query.label}
+          {listing.map((q) => (
+            <SelectItem id={q.label} key={q.value} value={String(q.value)}>
+              {q.label}
             </SelectItem>
           ))}
         </SelectGroup>
@@ -77,50 +82,11 @@ export default function CypherSearch() {
   )
 }
 
-interface HandleQueryParams {
-  cypher: string;
-  globe: null | ThreeGlobe;
-}
-
-const handleQuery = async ({cypher, globe}: HandleQueryParams) => {
-  if (!globe) return;
-
-  const countries = await API.getCountries();
-  if (!countries || !countries?.length) return;
-
-  const codes = new Set(countries.map((country: any) => String(country?.code).trim()));
-
-  const markers = document.querySelectorAll(".country-marker");
-  markers?.forEach((marker) => {
-    const countryCode = marker?.id?.split("-")?.[1];
-    if (codes.has(countryCode)) {
-      marker.classList.remove("hidden")
-    } else {
-      marker.classList.add("hidden")
-    }
-  });
-
-  const minColor = new Color(GLOBE_SETTINGS.COLORS.highlightPolygonMin);
-  const maxColor = new Color(GLOBE_SETTINGS.COLORS.highlightPolygonMax);
-  const inactiveColor = new Color(GLOBE_SETTINGS.COLORS.inactivePolygon);
-
-  const colorSpace = (alpha: number) => minColor.clone().lerp(maxColor, alpha);
-
-  let current = 0.15;
-
-  globe
-    .hexPolygonsData()
-    .forEach((d: any) => {
-      if (codes.has(d?.properties?.ISO_A3)) {
-        d.__threeObj.material.color = colorSpace(current);
-        current += 0.15;
-      } else {
-        d.__threeObj.material.color = inactiveColor;
-      }
-    });
-}
-
-const handleClear = (globe: null | ThreeGlobe) => {
+const handleClear = (
+  globe: null | ThreeGlobe,
+  setRegionData: any,
+  setCountryData: any
+) => {
   if (!globe) return;
 
   const defaultColor = new Color(GLOBE_SETTINGS.COLORS.polygon);
@@ -129,9 +95,28 @@ const handleClear = (globe: null | ThreeGlobe) => {
     .forEach((d: any) => {
       d.__threeObj.material.color = defaultColor;
     });
-  
-  const markers = document.querySelectorAll(".country-marker");
-  markers?.forEach((marker) => {
-    marker.classList.add("hidden")
+
+  setRegionData((prev: any) => {
+    const regionData = { ...prev };
+    Object.keys(regionData).forEach((region) => {
+      regionData[region] = {};
+    });
+    return regionData;
+  })
+
+  setCountryData((prev: any) => {
+    const countryData = { ...prev };
+    Object.keys(countryData).forEach((country) => {
+      countryData[country] = {};
+    });
+    return countryData;
+  });
+
+  document.querySelectorAll(".country-marker")?.forEach((marker) => {
+    marker.classList.add("hidden");
+  });
+
+  document.querySelectorAll(".region-marker")?.forEach((marker) => {
+    marker.classList.add("hidden");
   });
 }

@@ -8,9 +8,9 @@ import type { FrameData } from '@/types.ts';
 const Globe = () => {
   const containerRef = useRef(null);
   const [frameData, setFrameData] = useState<FrameData | null>(null);
-  const { setGlobe } = useContext(GlobeContext);
+  const { setGlobe, setOpenModal } = useContext(GlobeContext);
 
-  useGlobe(containerRef, setFrameData, setGlobe);
+  useGlobe(containerRef, setFrameData, setGlobe, setOpenModal);
   useAnimate(frameData);
 
   return (
