@@ -178,7 +178,7 @@ ORDER BY avg_percentage_change DESC
 
 WITH COLLECT({country: country, avg_percentage_change: avg_percentage_change}) AS results
 WITH results, SIZE(results) AS total
-WITH results, total,
+WITH results,
      results[0] AS best_1,
      results[1] as best_2,
      results[2] as best_3,
@@ -189,7 +189,8 @@ WITH results, total,
      results[total - 2] AS lowest_2,
      results[total - 3] AS lowest_3
 
-UNWIND [best_1, best_2, best_3, middle_1, middle_2, middle_3, lowest_1, lowest_2, lowest_3] AS main
+WITH [best_1, best_2, best_3, middle_1, middle_2, middle_3, lowest_1, lowest_2, lowest_3] AS main_results, results
+UNWIND main_results AS main
 MATCH (start:Country {name: main.country})
 
 CALL apoc.path.subgraphNodes(start, {
@@ -199,22 +200,13 @@ CALL apoc.path.subgraphNodes(start, {
   limit: 100
 }) YIELD node AS neighbor
 
-WITH main, neighbor
-MATCH (neighbor)-[m:MEASURED]->(metric:Metric)
-WHERE m.year >= '1991' AND m.year <= '2018'
-WITH main, neighbor, metric, m.year AS year, toFloat(m.value) AS value
-ORDER BY neighbor.name, metric.name, year
-WITH main, neighbor, metric.name AS metric_name, COLLECT(year) AS years, COLLECT(value) AS values
-WHERE SIZE(values) = (2018 - 1991 + 1)
-UNWIND RANGE(1, SIZE(values)-1) AS i
-WITH main, neighbor, values[i] AS current_value, values[i-1] AS previous_value
-WHERE previous_value <> 0
-WITH main, neighbor, (current_value - previous_value) / previous_value * 100 AS yearly_percentage_change
-WHERE NOT isnan(yearly_percentage_change) AND NOT yearly_percentage_change = 'Infinity'
-WITH main, neighbor, AVG(yearly_percentage_change) AS neighbor_avg_percentage_change
-
-RETURN main.country AS main_country, main.avg_percentage_change AS main_avg_percentage_change,
-       neighbor.name AS neighbor_country, neighbor_avg_percentage_change
+WITH main, neighbor, results
+UNWIND results AS result
+MATCH (neighbor:Country {name: result.country})
+RETURN main.country AS main_country, 
+       main.avg_percentage_change AS main_avg_percentage_change,
+       neighbor.name AS neighbor_country, 
+       result.avg_percentage_change AS neighbor_avg_percentage_change
 ORDER BY main_country, neighbor_avg_percentage_change DESC
 ```
 
