@@ -87,7 +87,21 @@ ORDER BY metric
 
 ### 3. ¿Qué métricas son las que más han avanzado / retrocedido globalmente?
 
+La consulta en el endpoint recupera las métricas con los mayores cambios promedio, tanto positivos como negativos, entre años consecutivos y devuelve los tres cambios más grandes y los tres más pequeños.
+
 ```cypher
+
+MATCH (c:Country)-[r:MEASURED]->(m:Metric)
+WITH m.name AS Metric, r.year AS Year, toFloat(r.value) AS Value
+ORDER BY Metric, Year
+WITH Metric, collect(Value) AS Values, collect(Year) AS Years
+WITH Metric, apoc.coll.pairsMin(Values) AS Changes, Years
+UNWIND range(0, size(Changes) - 1) AS i
+WITH Metric, Changes[i] AS Change, Years[i + 1] AS Year
+WITH Metric, (Change[1] - Change[0]) AS Change, Year
+RETURN Metric, avg(Change) AS AvgChange, Year
+ORDER BY AvgChange DESC
+LIMIT 3
 
 ```
 
