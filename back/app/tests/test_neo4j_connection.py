@@ -1,13 +1,14 @@
 import logging
+import os
+
 from neo4j import GraphDatabase
 
 # Enable logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Neo4j Aura connection details
-NEO4J_URI = "neo4j+ssc://2f81b269.databases.neo4j.io"  # Note the use of neo4j+ssc
-NEO4J_USER = "neo4j"
-NEO4J_PASSWORD = "WOh6fMnAwdRKSbaN_EVS9SlRZP3IkpEfnsChAqHY4BI"
+NEO4J_URI = os.environ.get("NEO4J_URI")
+NEO4J_USER = os.environ.get("NEO4J_USER")
+NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD")
 
 def test_connection():
     driver = GraphDatabase.driver(

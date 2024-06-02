@@ -1,15 +1,27 @@
-import math
-from typing import List, Optional
+from contextlib import asynccontextmanager
+from typing import Optional
 
-import pandas as pd
-from fastapi import FastAPI, HTTPException, Request
+from app.config import Config
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from neo4j import GraphDatabase
 from pydantic import BaseModel
 
-from app.config import Config
+config = {}
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    config["driver"] = Config.get_driver()
+    yield
+    config["driver"].close()
+
+
+app = FastAPI(
+    title="Earth4j",
+    description="Ecotech Hack 2024 | API",
+    version="1.0",
+    lifespan=lifespan,
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,109 +31,135 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-driver = Config.get_driver()
-
-
-# Close the driver connection when the app is shutting down
-
-
-@app.on_event("shutdown")
-def shutdown_event():
-    driver.close()
-
-
-# Root endpoint for testing
-
 
 @app.get("/")
-async def root():
-    return {"message": "Big testing"}
+async def heartbeat():
+    return {"health": "ok"}
 
 
 # Endpoint to get country data
-
-
 @app.get("/api/countries")
-async def get_countries():
-    query = "MATCH (c:Country) RETURN c.code2 AS code2, c.code AS code, c.notes AS notes, c.name AS name, c.currency AS currency LIMIT 10"
-    with driver.session() as session:
-        result = session.run(query)
+async def get_countries(next_token: Optional[str] = None):
+    
+    query = """
+    MATCH (c:Country) WHERE c.code > $next_token
+    RETURN c.code AS code, c.name AS name, c.currency AS currency
+    ORDER BY c.code
+    LIMIT 10
+    """ if next_token else """
+    MATCH (c:Country)
+    RETURN c.code AS code, c.name AS name, c.currency AS currency
+    ORDER BY c.code
+    LIMIT 10
+    """
+
+    with config["driver"].session() as session:
+        result = session.run(query, next_token=next_token)
         countries = [record.data() for record in result]
-    return {"countries": countries}
+        next_code = countries[-1]["code"] if countries else None
+    return {
+        "data": countries,
+        "query": query,
+        "next_token": next_code
+    }
 
 
 # Endpoint to get region data
-
-
 @app.get("/api/regions")
-async def get_regions():
-    query = "MATCH (r:Region) RETURN r.name AS name, r.id AS id LIMIT 10"
-    with driver.session() as session:
-        result = session.run(query)
+async def get_regions(next_token: Optional[str] = None):
+    query = """
+    MATCH (r:Region) WHERE r.id > $next_token
+    RETURN r.name AS name, r.id AS id
+    ORDER BY r.id
+    LIMIT 10
+    """ if next_token else """
+    MATCH (r:Region)
+    RETURN r.name AS name, r.id AS id
+    ORDER BY r.id
+    LIMIT 10
+    """
+
+    with config["driver"].session() as session:
+        result = session.run(query, next_token=next_token)
         regions = [record.data() for record in result]
-    return {"regions": regions}
+        next_id = regions[-1]["id"] if regions else None
+    return {
+        "regions": regions,
+        "query": query,
+        "next_token": next_id,
+    }
 
 
 # Endpoint to get metric data
-
-
 @app.get("/api/metrics")
-async def get_metrics():
-    query = "MATCH (m:Metric) RETURN m.code AS code, m.name AS name, m.periodicity AS periodicity, m.definition AS definition LIMIT 10"
-    with driver.session() as session:
-        result = session.run(query)
+async def get_metrics(next_token: Optional[str] = None):
+    query = """
+    MATCH (m:Metric) WHERE m.code > $next_token
+    RETURN m.code AS code, m.name AS name, m.periodicity AS periodicity, m.definition AS definition
+    ORDER BY m.code
+    LIMIT 10
+    """ if next_token else """
+    MATCH (m:Metric)
+    RETURN m.code AS code, m.name AS name, m.periodicity AS periodicity, m.definition AS definition
+    ORDER BY m.code
+    LIMIT 10
+    """
+
+    with config["driver"].session() as session:
+        result = session.run(query, next_token=next_token)
         metrics = [record.data() for record in result]
-    return {"metrics": metrics}
+        next_code = metrics[-1]["code"] if metrics else None
+    return {
+        "metrics": metrics,
+        "query": query,
+        "next_token": next_code,
+    }
 
 
 # Endpoint to get income group data
-
-
 @app.get("/api/income-groups")
 async def get_income_groups():
     query = "MATCH (i:IncomeGroup) RETURN i.name AS name, i.id AS id LIMIT 10"
-    with driver.session() as session:
+    with config["driver"].session() as session:
         result = session.run(query)
         income_groups = [record.data() for record in result]
-    return {"income_groups": income_groups}
+    return {
+        "income_groups": income_groups,
+        "query": query,
+        "next_token": None,
+    }
 
 
 # Endpoint to get topic data
-
-
 @app.get("/api/topics")
-async def get_topics():
-    query = "MATCH (t:Topic) RETURN t.topic AS topic, t.id AS id LIMIT 10"
-    with driver.session() as session:
-        result = session.run(query)
+async def get_topics(next_token: Optional[str] = None):
+    query = """
+    MATCH (t:Topic) WHERE t.id > $next_token
+    RETURN t.topic AS topic, t.id AS id
+    ORDER BY t.id
+    LIMIT 10
+    """ if next_token else """
+    MATCH (t:Topic)
+    RETURN t.topic AS topic, t.id AS id
+    ORDER BY t.id
+    LIMIT 10
+    """
+
+    with config["driver"].session() as session:
+        result = session.run(query, next_token=next_token)
         topics = [record.data() for record in result]
-    return {"topics": topics}
+        next_id = topics[-1]["id"] if topics else None
 
+    return {
+        "data": topics,
+        "query": query,
+        "next_token": next_id,
+    }
 
-# Endpoint to execute Cypher queries
-
-
-@app.post("/api/execute-cypher")
-async def execute_cypher(request: Request):
-    body = await request.json()
-    cypher_query = body.get("query")
-
-    if not cypher_query:
-        raise HTTPException(status_code=400, detail="Query not provided")
-
-    with driver.session() as session:
-        try:
-            result = session.run(cypher_query)
-            records = [record.data() for record in result]
-            return {"result": records}
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-
-
+# Bonus Question: Geographical Proximity Relevance
 @app.get("/api/bonus")
 async def get_neighborhoods_for_bonus():
-    with driver.session() as session:
-
+    with config["driver"].session() as session:
         query = """
             MATCH (c:Country)-[m:MEASURED]->(metric:Metric)
             WHERE m.year >= '1991' AND m.year <= '2018'
@@ -183,7 +221,11 @@ async def get_neighborhoods_for_bonus():
                 record["neighbor_country"]
             ] = record["neighbor_avg_percentage_change"]
 
-        return {"data": data}
+    return {
+        "data": data,
+        "query": query,
+        "next_token": None,
+    }
 
 
 @app.get("/api/metrics/changes_income")
@@ -221,8 +263,7 @@ async def get_metrics_changes_income(order: str = "ASC"):
     """
 
     try:
-        with driver.session() as session:
-            # Ejecutar la consulta de cambios positivos
+        with config["driver"].session() as session:
             result_positive = session.run(query_positive)
             data_positive = [
                 {
@@ -234,7 +275,6 @@ async def get_metrics_changes_income(order: str = "ASC"):
                 for record in result_positive
             ]
 
-            # Ejecutar la consulta de cambios negativos
             result_negative = session.run(query_negative)
             data_negative = [
                 {
@@ -246,26 +286,26 @@ async def get_metrics_changes_income(order: str = "ASC"):
                 for record in result_negative
             ]
 
-        # Verificar si no se obtuvieron datos
         if not data_positive and not data_negative:
             raise HTTPException(
                 status_code=404, detail="No data retrieved from the database"
             )
 
-        # Combinar los datos de cambios positivos y negativos
         combined_data = data_positive + data_negative
 
-        # Ordenar los datos combinados según el parámetro de orden
         combined_data = sorted(
             combined_data,
             key=lambda x: x["AvgChange"],
             reverse=(order.upper() == "DESC"),
         )
 
-        # Retornar la respuesta con los datos combinados y el orden
-        return {"data": combined_data, "order": order.upper()}
+        return {
+            "data": combined_data,
+            "query": query_positive + query_negative,
+            "order": order.upper(),
+            "next_token": None,
+        }
     except Exception as e:
-        # Manejo de errores y respuesta con código de estado 500
         print("Error:", str(e))
         import traceback
 
@@ -309,7 +349,7 @@ async def get_metrics_changes(order: str = "ASC"):
     """
 
     try:
-        with driver.session() as session:
+        with config["driver"].session() as session:
             # Ejecutar la consulta de cambios positivos
             result_positive = session.run(query_positive)
             data_positive = [
@@ -349,7 +389,12 @@ async def get_metrics_changes(order: str = "ASC"):
         )
 
         # Retornar la respuesta con los datos combinados y el orden
-        return {"data": combined_data, "order": order.upper()}
+        return {
+            "data": combined_data,
+            "query": query_positive + query_negative,
+            "order": order.upper(),
+            "next_token": None,
+        }
     except Exception as e:
         # Manejo de errores y respuesta con código de estado 500
         print("Error:", str(e))
@@ -416,13 +461,14 @@ async def get_regions_by_metric(
         raise HTTPException(status_code=400, detail="Invalid strategy")
 
     try:
-        with driver.session() as session:
+        with config["driver"].session() as session:
             result = session.run(query)
             return {
                 "data": [record.data() for record in result],
+                "query": query,
                 "order": order.upper(),
                 "strategy": strategy,
-                "query": query,
+                "next_token": None
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -479,14 +525,15 @@ async def get_countries_by_metric(
         raise HTTPException(status_code=400, detail="Invalid strategy")
 
     try:
-        with driver.session() as session:
+        with config["driver"].session() as session:
             result = session.run(query)
             print(result)
             return {
                 "data": [record.data() for record in result],
+                "query": query,
                 "order": order.upper(),
                 "strategy": strategy,
-                "query": query,
+                "next_token": None,
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -528,11 +575,13 @@ async def get_top_countries(order: Optional[str] = "DESC"):
     """
 
     try:
-        with driver.session() as session:
+        with config["driver"].session() as session:
             result = session.run(query)
             return {
                 "data": [record.data() for record in result],
+                "query": query,
                 "order": order.upper(),
+                "next_token": None
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
