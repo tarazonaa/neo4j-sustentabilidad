@@ -3,13 +3,15 @@ import pandas as pd
 
 driver = Config.get_driver()
 
-relationships_df = pd.read_csv("./csvs/data_combined.csv")
+relationships_df = pd.read_csv("./app/csvs/data_combined.csv")
 
 # Rename the columns country code and indicator name
-relationships_df = relationships_df.rename(columns={"Country Code": "country_code", "Indicator Code": "indicator_code"})
+relationships_df = relationships_df.rename(
+    columns={"Country Code": "country_code", "Indicator Code": "indicator_code"}
+)
 
 query = """
-LOAD CSV WITH HEADERS FROM 'https://neo4j-ps-ds-bootcamp.s3.amazonaws.com/data/hackaton/SDGData_Combined.csv' AS row
+LOAD CSV WITH HEADERS FROM './app/csvs/data_combined.csv' AS row
 WITH row
 MATCH (c:Country {code: row.`Country Code`})
 MATCH (m:Metric {code: row.`Indicator Code`})
@@ -22,4 +24,4 @@ with driver.session() as session:
     print("Result: ", list(result))
     countries = [record["row"] for record in result]
     for country in countries:
-        __import__('pprint').pprint(country)
+        __import__("pprint").pprint(country)
