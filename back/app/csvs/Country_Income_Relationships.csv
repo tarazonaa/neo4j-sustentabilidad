@@ -1,0 +1,264 @@
+CountryCode,IncomeGroup,IncomeGroupID
+ABW,High income,HIGH_INCOME
+AFG,Low income,LOW_INCOME
+AGO,Lower middle income,LOWER_MIDDLE_INCOME
+ALB,Upper middle income,UPPER_MIDDLE_INCOME
+AND,High income,HIGH_INCOME
+ARB,,
+ARE,High income,HIGH_INCOME
+ARG,High income,HIGH_INCOME
+ARM,Upper middle income,UPPER_MIDDLE_INCOME
+ASM,Upper middle income,UPPER_MIDDLE_INCOME
+ATG,High income,HIGH_INCOME
+AUS,High income,HIGH_INCOME
+AUT,High income,HIGH_INCOME
+AZE,Upper middle income,UPPER_MIDDLE_INCOME
+BDI,Low income,LOW_INCOME
+BEL,High income,HIGH_INCOME
+BEN,Low income,LOW_INCOME
+BFA,Low income,LOW_INCOME
+BGD,Lower middle income,LOWER_MIDDLE_INCOME
+BGR,Upper middle income,UPPER_MIDDLE_INCOME
+BHR,High income,HIGH_INCOME
+BHS,High income,HIGH_INCOME
+BIH,Upper middle income,UPPER_MIDDLE_INCOME
+BLR,Upper middle income,UPPER_MIDDLE_INCOME
+BLZ,Upper middle income,UPPER_MIDDLE_INCOME
+BMU,High income,HIGH_INCOME
+BOL,Lower middle income,LOWER_MIDDLE_INCOME
+BRA,Upper middle income,UPPER_MIDDLE_INCOME
+BRB,High income,HIGH_INCOME
+BRN,High income,HIGH_INCOME
+BTN,Lower middle income,LOWER_MIDDLE_INCOME
+BWA,Upper middle income,UPPER_MIDDLE_INCOME
+CAF,Low income,LOW_INCOME
+CAN,High income,HIGH_INCOME
+CEB,,
+CHE,High income,HIGH_INCOME
+CHI,High income,HIGH_INCOME
+CHL,High income,HIGH_INCOME
+CHN,Upper middle income,UPPER_MIDDLE_INCOME
+CIV,Lower middle income,LOWER_MIDDLE_INCOME
+CMR,Lower middle income,LOWER_MIDDLE_INCOME
+COD,Low income,LOW_INCOME
+COG,Lower middle income,LOWER_MIDDLE_INCOME
+COL,Upper middle income,UPPER_MIDDLE_INCOME
+COM,Low income,LOW_INCOME
+CPV,Lower middle income,LOWER_MIDDLE_INCOME
+CRI,Upper middle income,UPPER_MIDDLE_INCOME
+CSS,,
+CUB,Upper middle income,UPPER_MIDDLE_INCOME
+CUW,High income,HIGH_INCOME
+CYM,High income,HIGH_INCOME
+CYP,High income,HIGH_INCOME
+CZE,High income,HIGH_INCOME
+DEU,High income,HIGH_INCOME
+DJI,Lower middle income,LOWER_MIDDLE_INCOME
+DMA,Upper middle income,UPPER_MIDDLE_INCOME
+DNK,High income,HIGH_INCOME
+DOM,Upper middle income,UPPER_MIDDLE_INCOME
+DZA,Upper middle income,UPPER_MIDDLE_INCOME
+EAP,,
+EAR,,
+EAS,,
+ECA,,
+ECS,,
+ECU,Upper middle income,UPPER_MIDDLE_INCOME
+EGY,Lower middle income,LOWER_MIDDLE_INCOME
+EMU,,
+ERI,Low income,LOW_INCOME
+ESP,High income,HIGH_INCOME
+EST,High income,HIGH_INCOME
+ETH,Low income,LOW_INCOME
+EUU,,
+FCS,,
+FIN,High income,HIGH_INCOME
+FJI,Upper middle income,UPPER_MIDDLE_INCOME
+FRA,High income,HIGH_INCOME
+FRO,High income,HIGH_INCOME
+FSM,Lower middle income,LOWER_MIDDLE_INCOME
+GAB,Upper middle income,UPPER_MIDDLE_INCOME
+GBR,High income,HIGH_INCOME
+GEO,Lower middle income,LOWER_MIDDLE_INCOME
+GHA,Lower middle income,LOWER_MIDDLE_INCOME
+GIB,High income,HIGH_INCOME
+GIN,Low income,LOW_INCOME
+GMB,Low income,LOW_INCOME
+GNB,Low income,LOW_INCOME
+GNQ,Upper middle income,UPPER_MIDDLE_INCOME
+GRC,High income,HIGH_INCOME
+GRD,Upper middle income,UPPER_MIDDLE_INCOME
+GRL,High income,HIGH_INCOME
+GTM,Upper middle income,UPPER_MIDDLE_INCOME
+GUM,High income,HIGH_INCOME
+GUY,Upper middle income,UPPER_MIDDLE_INCOME
+HIC,,
+HKG,High income,HIGH_INCOME
+HND,Lower middle income,LOWER_MIDDLE_INCOME
+HPC,,
+HRV,High income,HIGH_INCOME
+HTI,Low income,LOW_INCOME
+HUN,High income,HIGH_INCOME
+IBD,,
+IBT,,
+IDA,,
+IDB,,
+IDN,Lower middle income,LOWER_MIDDLE_INCOME
+IDX,,
+IMN,High income,HIGH_INCOME
+IND,Lower middle income,LOWER_MIDDLE_INCOME
+IRL,High income,HIGH_INCOME
+IRN,Upper middle income,UPPER_MIDDLE_INCOME
+IRQ,Upper middle income,UPPER_MIDDLE_INCOME
+ISL,High income,HIGH_INCOME
+ISR,High income,HIGH_INCOME
+ITA,High income,HIGH_INCOME
+JAM,Upper middle income,UPPER_MIDDLE_INCOME
+JOR,Upper middle income,UPPER_MIDDLE_INCOME
+JPN,High income,HIGH_INCOME
+KAZ,Upper middle income,UPPER_MIDDLE_INCOME
+KEN,Lower middle income,LOWER_MIDDLE_INCOME
+KGZ,Lower middle income,LOWER_MIDDLE_INCOME
+KHM,Lower middle income,LOWER_MIDDLE_INCOME
+KIR,Lower middle income,LOWER_MIDDLE_INCOME
+KNA,High income,HIGH_INCOME
+KOR,High income,HIGH_INCOME
+KWT,High income,HIGH_INCOME
+LAC,,
+LAO,Lower middle income,LOWER_MIDDLE_INCOME
+LBN,Upper middle income,UPPER_MIDDLE_INCOME
+LBR,Low income,LOW_INCOME
+LBY,Upper middle income,UPPER_MIDDLE_INCOME
+LCA,Upper middle income,UPPER_MIDDLE_INCOME
+LCN,,
+LDC,,
+LIC,,
+LIE,High income,HIGH_INCOME
+LKA,Lower middle income,LOWER_MIDDLE_INCOME
+LMC,,
+LMY,,
+LSO,Lower middle income,LOWER_MIDDLE_INCOME
+LTE,,
+LTU,High income,HIGH_INCOME
+LUX,High income,HIGH_INCOME
+LVA,High income,HIGH_INCOME
+MAC,High income,HIGH_INCOME
+MAF,High income,HIGH_INCOME
+MAR,Lower middle income,LOWER_MIDDLE_INCOME
+MCO,High income,HIGH_INCOME
+MDA,Lower middle income,LOWER_MIDDLE_INCOME
+MDG,Low income,LOW_INCOME
+MDV,Upper middle income,UPPER_MIDDLE_INCOME
+MEA,,
+MEX,Upper middle income,UPPER_MIDDLE_INCOME
+MHL,Upper middle income,UPPER_MIDDLE_INCOME
+MIC,,
+MKD,Upper middle income,UPPER_MIDDLE_INCOME
+MLI,Low income,LOW_INCOME
+MLT,High income,HIGH_INCOME
+MMR,Lower middle income,LOWER_MIDDLE_INCOME
+MNA,,
+MNE,Upper middle income,UPPER_MIDDLE_INCOME
+MNG,Lower middle income,LOWER_MIDDLE_INCOME
+MNP,High income,HIGH_INCOME
+MOZ,Low income,LOW_INCOME
+MRT,Lower middle income,LOWER_MIDDLE_INCOME
+MUS,Upper middle income,UPPER_MIDDLE_INCOME
+MWI,Low income,LOW_INCOME
+MYS,Upper middle income,UPPER_MIDDLE_INCOME
+NAC,,
+NAM,Upper middle income,UPPER_MIDDLE_INCOME
+NCL,High income,HIGH_INCOME
+NER,Low income,LOW_INCOME
+NGA,Lower middle income,LOWER_MIDDLE_INCOME
+NIC,Lower middle income,LOWER_MIDDLE_INCOME
+NLD,High income,HIGH_INCOME
+NOR,High income,HIGH_INCOME
+NPL,Low income,LOW_INCOME
+NRU,Upper middle income,UPPER_MIDDLE_INCOME
+NZL,High income,HIGH_INCOME
+OED,,
+OMN,High income,HIGH_INCOME
+OSS,,
+PAK,Lower middle income,LOWER_MIDDLE_INCOME
+PAN,High income,HIGH_INCOME
+PER,Upper middle income,UPPER_MIDDLE_INCOME
+PHL,Lower middle income,LOWER_MIDDLE_INCOME
+PLW,High income,HIGH_INCOME
+PNG,Lower middle income,LOWER_MIDDLE_INCOME
+POL,High income,HIGH_INCOME
+PRE,,
+PRI,High income,HIGH_INCOME
+PRK,Low income,LOW_INCOME
+PRT,High income,HIGH_INCOME
+PRY,Upper middle income,UPPER_MIDDLE_INCOME
+PSE,Lower middle income,LOWER_MIDDLE_INCOME
+PSS,,
+PST,,
+PYF,High income,HIGH_INCOME
+QAT,High income,HIGH_INCOME
+ROU,Upper middle income,UPPER_MIDDLE_INCOME
+RUS,Upper middle income,UPPER_MIDDLE_INCOME
+RWA,Low income,LOW_INCOME
+SAS,,
+SAU,High income,HIGH_INCOME
+SDN,Lower middle income,LOWER_MIDDLE_INCOME
+SEN,Low income,LOW_INCOME
+SGP,High income,HIGH_INCOME
+SLB,Lower middle income,LOWER_MIDDLE_INCOME
+SLE,Low income,LOW_INCOME
+SLV,Lower middle income,LOWER_MIDDLE_INCOME
+SMR,High income,HIGH_INCOME
+SOM,Low income,LOW_INCOME
+SRB,Upper middle income,UPPER_MIDDLE_INCOME
+SSA,,
+SSD,Low income,LOW_INCOME
+SSF,,
+SST,,
+STP,Lower middle income,LOWER_MIDDLE_INCOME
+SUR,Upper middle income,UPPER_MIDDLE_INCOME
+SVK,High income,HIGH_INCOME
+SVN,High income,HIGH_INCOME
+SWE,High income,HIGH_INCOME
+SWZ,Lower middle income,LOWER_MIDDLE_INCOME
+SXM,High income,HIGH_INCOME
+SYC,High income,HIGH_INCOME
+SYR,Low income,LOW_INCOME
+TCA,High income,HIGH_INCOME
+TCD,Low income,LOW_INCOME
+TEA,,
+TEC,,
+TGO,Low income,LOW_INCOME
+THA,Upper middle income,UPPER_MIDDLE_INCOME
+TJK,Low income,LOW_INCOME
+TKM,Upper middle income,UPPER_MIDDLE_INCOME
+TLA,,
+TLS,Lower middle income,LOWER_MIDDLE_INCOME
+TMN,,
+TON,Upper middle income,UPPER_MIDDLE_INCOME
+TSA,,
+TSS,,
+TTO,High income,HIGH_INCOME
+TUN,Lower middle income,LOWER_MIDDLE_INCOME
+TUR,Upper middle income,UPPER_MIDDLE_INCOME
+TUV,Upper middle income,UPPER_MIDDLE_INCOME
+TZA,Low income,LOW_INCOME
+UGA,Low income,LOW_INCOME
+UKR,Lower middle income,LOWER_MIDDLE_INCOME
+UMC,,
+URY,High income,HIGH_INCOME
+USA,High income,HIGH_INCOME
+UZB,Lower middle income,LOWER_MIDDLE_INCOME
+VCT,Upper middle income,UPPER_MIDDLE_INCOME
+VEN,Upper middle income,UPPER_MIDDLE_INCOME
+VGB,High income,HIGH_INCOME
+VIR,High income,HIGH_INCOME
+VNM,Lower middle income,LOWER_MIDDLE_INCOME
+VUT,Lower middle income,LOWER_MIDDLE_INCOME
+WLD,,
+WSM,Upper middle income,UPPER_MIDDLE_INCOME
+XKX,Lower middle income,LOWER_MIDDLE_INCOME
+YEM,Low income,LOW_INCOME
+ZAF,Upper middle income,UPPER_MIDDLE_INCOME
+ZMB,Lower middle income,LOWER_MIDDLE_INCOME
+ZWE,Low income,LOW_INCOME

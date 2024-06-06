@@ -1,0 +1,823 @@
+country_code,country_name,country_3_digit_code,country_border_code,country_border_name,border_country_3_digit_code
+AD,Andorra,AND,FR,France,FRA
+AD,Andorra,AND,ES,Spain,ESP
+AE,United Arab Emirates,ARE,OM,Oman,OMN
+AE,United Arab Emirates,ARE,SA,Saudi Arabia,SAU
+AF,Afghanistan,AFG,CN,China,CHN
+AF,Afghanistan,AFG,IR,Iran (Islamic Republic of),IRN
+AF,Afghanistan,AFG,PK,Pakistan,PAK
+AF,Afghanistan,AFG,TJ,Tajikistan,TJK
+AF,Afghanistan,AFG,TM,Turkmenistan,TKM
+AF,Afghanistan,AFG,UZ,Uzbekistan,UZB
+AG,Antigua and Barbuda,ATG,,,CHI
+AG,Antigua and Barbuda,ATG,,,NAM
+AI,Anguilla,,,,CHI
+AI,Anguilla,,,,NAM
+AL,Albania,ALB,GR,Greece,GRC
+AL,Albania,ALB,ME,Montenegro,MNE
+AL,Albania,ALB,MK,North Macedonia,MKD
+AL,Albania,ALB,RS,Serbia,SRB
+AM,Armenia,ARM,AZ,Azerbaijan,AZE
+AM,Armenia,ARM,GE,Georgia,GEO
+AM,Armenia,ARM,IR,Iran (Islamic Republic of),IRN
+AM,Armenia,ARM,TR,Turkey,TUR
+AO,Angola,AGO,CG,Congo,COG
+AO,Angola,AGO,CD,Congo (the Democratic Republic of the),COD
+AO,Angola,AGO,,Namibia,CHI
+AO,Angola,AGO,,Namibia,NAM
+AO,Angola,AGO,ZM,Zambia,ZMB
+AQ,Antarctica,,,,CHI
+AQ,Antarctica,,,,NAM
+AR,Argentina,ARG,BO,Bolivia (Plurinational State Of),BOL
+AR,Argentina,ARG,BR,Brazil,BRA
+AR,Argentina,ARG,CL,Chile,CHL
+AR,Argentina,ARG,PY,Paraguay,PRY
+AR,Argentina,ARG,UY,Uruguay,URY
+AS,American Samoa,ASM,,,CHI
+AS,American Samoa,ASM,,,NAM
+AT,Austria,AUT,CZ,Czechia,CZE
+AT,Austria,AUT,DE,Germany,DEU
+AT,Austria,AUT,HU,Hungary,HUN
+AT,Austria,AUT,IT,Italy,ITA
+AT,Austria,AUT,LI,Liechtenstein,LIE
+AT,Austria,AUT,SK,Slovakia,SVK
+AT,Austria,AUT,SI,Slovenia,SVN
+AT,Austria,AUT,CH,Switzerland,CHE
+AU,Australia,AUS,,,CHI
+AU,Australia,AUS,,,NAM
+AW,Aruba,ABW,,,CHI
+AW,Aruba,ABW,,,NAM
+AX,Aland Islands,,,,CHI
+AX,Aland Islands,,,,NAM
+AZ,Azerbaijan,AZE,AM,Armenia,ARM
+AZ,Azerbaijan,AZE,GE,Georgia,GEO
+AZ,Azerbaijan,AZE,IR,Iran (Islamic Republic of),IRN
+AZ,Azerbaijan,AZE,RU,Russian Federation,RUS
+AZ,Azerbaijan,AZE,TR,Turkey,TUR
+BA,Bosnia and Herzegovina,BIH,HR,Croatia,HRV
+BA,Bosnia and Herzegovina,BIH,ME,Montenegro,MNE
+BA,Bosnia and Herzegovina,BIH,RS,Serbia,SRB
+BB,Barbados,BRB,,,CHI
+BB,Barbados,BRB,,,NAM
+BD,Bangladesh,BGD,IN,India,IND
+BD,Bangladesh,BGD,MM,Myanmar,MMR
+BE,Belgium,BEL,FR,France,FRA
+BE,Belgium,BEL,DE,Germany,DEU
+BE,Belgium,BEL,LU,Luxembourg,LUX
+BE,Belgium,BEL,NL,Netherlands,NLD
+BF,Burkina Faso,BFA,BJ,Benin,BEN
+BF,Burkina Faso,BFA,CI,Cote d’Ivoire,CIV
+BF,Burkina Faso,BFA,GH,Ghana,GHA
+BF,Burkina Faso,BFA,ML,Mali,MLI
+BF,Burkina Faso,BFA,NE,Niger,NER
+BF,Burkina Faso,BFA,TG,Togo,TGO
+BG,Bulgaria,BGR,GR,Greece,GRC
+BG,Bulgaria,BGR,MK,North Macedonia,MKD
+BG,Bulgaria,BGR,RO,Romania,ROU
+BG,Bulgaria,BGR,RS,Serbia,SRB
+BG,Bulgaria,BGR,TR,Turkey,TUR
+BH,Bahrain,BHR,,,CHI
+BH,Bahrain,BHR,,,NAM
+BI,Burundi,BDI,CD,Congo (the Democratic Republic of the),COD
+BI,Burundi,BDI,RW,Rwanda,RWA
+BI,Burundi,BDI,TZ,Tanzania (the United Republic of),TZA
+BJ,Benin,BEN,BF,Burkina Faso,BFA
+BJ,Benin,BEN,NE,Niger,NER
+BJ,Benin,BEN,NG,Nigeria,NGA
+BJ,Benin,BEN,TG,Togo,TGO
+BL,Saint Barthelemy,,,,CHI
+BL,Saint Barthelemy,,,,NAM
+BM,Bermuda,BMU,,,CHI
+BM,Bermuda,BMU,,,NAM
+BN,Brunei Darussalam,BRN,MY,Malaysia,MYS
+BO,Bolivia (Plurinational State Of),BOL,AR,Argentina,ARG
+BO,Bolivia (Plurinational State Of),BOL,BR,Brazil,BRA
+BO,Bolivia (Plurinational State Of),BOL,CL,Chile,CHL
+BO,Bolivia (Plurinational State Of),BOL,PY,Paraguay,PRY
+BO,Bolivia (Plurinational State Of),BOL,PE,Peru,PER
+BQ,"Bonaire, Sint Eustatius and Saba",,,,CHI
+BQ,"Bonaire, Sint Eustatius and Saba",,,,NAM
+BR,Brazil,BRA,AR,Argentina,ARG
+BR,Brazil,BRA,BO,Bolivia (Plurinational State Of),BOL
+BR,Brazil,BRA,CO,Colombia,COL
+BR,Brazil,BRA,GF,French Guiana,
+BR,Brazil,BRA,GY,Guyana,GUY
+BR,Brazil,BRA,PY,Paraguay,PRY
+BR,Brazil,BRA,PE,Peru,PER
+BR,Brazil,BRA,SR,Suriname,SUR
+BR,Brazil,BRA,UY,Uruguay,URY
+BR,Brazil,BRA,VE,Venezuela (Bolivarian Republic of),VEN
+BS,Bahamas,BHS,,,CHI
+BS,Bahamas,BHS,,,NAM
+BT,Bhutan,BTN,CN,China,CHN
+BT,Bhutan,BTN,IN,India,IND
+BV,Bouvet Island,,,,CHI
+BV,Bouvet Island,,,,NAM
+BW,Botswana,BWA,,Namibia,CHI
+BW,Botswana,BWA,,Namibia,NAM
+BW,Botswana,BWA,ZA,South Africa,ZAF
+BW,Botswana,BWA,ZM,Zambia,ZMB
+BW,Botswana,BWA,ZW,Zimbabwe,ZWE
+BY,Belarus,BLR,LV,Latvia,LVA
+BY,Belarus,BLR,LT,Lithuania,LTU
+BY,Belarus,BLR,PL,Poland,POL
+BY,Belarus,BLR,RU,Russian Federation,RUS
+BY,Belarus,BLR,UA,Ukraine,UKR
+BZ,Belize,BLZ,GT,Guatemala,GTM
+BZ,Belize,BLZ,MX,Mexico,MEX
+CA,Canada,CAN,US,United States of America,USA
+CC,Cocos (Keeling) Islands,,,,CHI
+CC,Cocos (Keeling) Islands,,,,NAM
+CD,Congo (the Democratic Republic of the),COD,AO,Angola,AGO
+CD,Congo (the Democratic Republic of the),COD,BI,Burundi,BDI
+CD,Congo (the Democratic Republic of the),COD,CF,Central African Republic,CAF
+CD,Congo (the Democratic Republic of the),COD,CG,Congo,COG
+CD,Congo (the Democratic Republic of the),COD,RW,Rwanda,RWA
+CD,Congo (the Democratic Republic of the),COD,SS,South Sudan,SSD
+CD,Congo (the Democratic Republic of the),COD,TZ,Tanzania (the United Republic of),TZA
+CD,Congo (the Democratic Republic of the),COD,UG,Uganda,UGA
+CD,Congo (the Democratic Republic of the),COD,ZM,Zambia,ZMB
+CF,Central African Republic,CAF,CM,Cameroon,CMR
+CF,Central African Republic,CAF,TD,Chad,TCD
+CF,Central African Republic,CAF,CG,Congo,COG
+CF,Central African Republic,CAF,CD,Congo (the Democratic Republic of the),COD
+CF,Central African Republic,CAF,SS,South Sudan,SSD
+CF,Central African Republic,CAF,SD,Sudan,SDN
+CG,Congo,COG,AO,Angola,AGO
+CG,Congo,COG,CM,Cameroon,CMR
+CG,Congo,COG,CF,Central African Republic,CAF
+CG,Congo,COG,CD,Congo (the Democratic Republic of the),COD
+CG,Congo,COG,GA,Gabon,GAB
+CH,Switzerland,CHE,AT,Austria,AUT
+CH,Switzerland,CHE,FR,France,FRA
+CH,Switzerland,CHE,DE,Germany,DEU
+CH,Switzerland,CHE,IT,Italy,ITA
+CH,Switzerland,CHE,LI,Liechtenstein,LIE
+CI,Cote d’Ivoire,CIV,BF,Burkina Faso,BFA
+CI,Cote d’Ivoire,CIV,GH,Ghana,GHA
+CI,Cote d’Ivoire,CIV,GN,Guinea,GIN
+CI,Cote d’Ivoire,CIV,LR,Liberia,LBR
+CI,Cote d’Ivoire,CIV,ML,Mali,MLI
+CK,Cook Islands,,,,CHI
+CK,Cook Islands,,,,NAM
+CL,Chile,CHL,AR,Argentina,ARG
+CL,Chile,CHL,BO,Bolivia (Plurinational State Of),BOL
+CL,Chile,CHL,PE,Peru,PER
+CM,Cameroon,CMR,CF,Central African Republic,CAF
+CM,Cameroon,CMR,TD,Chad,TCD
+CM,Cameroon,CMR,CG,Congo,COG
+CM,Cameroon,CMR,GQ,Equatorial Guinea,GNQ
+CM,Cameroon,CMR,GA,Gabon,GAB
+CM,Cameroon,CMR,NG,Nigeria,NGA
+CN,China,CHN,AF,Afghanistan,AFG
+CN,China,CHN,BT,Bhutan,BTN
+CN,China,CHN,HK,Hong Kong,HKG
+CN,China,CHN,IN,India,IND
+CN,China,CHN,KZ,Kazakhstan,KAZ
+CN,China,CHN,KP,Korea (Democratic People's Republic of),PRK
+CN,China,CHN,KG,Kyrgyzstan,KGZ
+CN,China,CHN,LA,Lao People's Democratic Republic,LAO
+CN,China,CHN,MO,Macao,MAC
+CN,China,CHN,MN,Mongolia,MNG
+CN,China,CHN,MM,Myanmar,MMR
+CN,China,CHN,NP,Nepal,NPL
+CN,China,CHN,PK,Pakistan,PAK
+CN,China,CHN,RU,Russian Federation,RUS
+CN,China,CHN,TJ,Tajikistan,TJK
+CN,China,CHN,VN,Viet Nam,VNM
+CO,Colombia,COL,BR,Brazil,BRA
+CO,Colombia,COL,EC,Ecuador,ECU
+CO,Colombia,COL,PA,Panama,PAN
+CO,Colombia,COL,PE,Peru,PER
+CO,Colombia,COL,VE,Venezuela (Bolivarian Republic of),VEN
+CR,Costa Rica,CRI,NI,Nicaragua,NIC
+CR,Costa Rica,CRI,PA,Panama,PAN
+CU,Cuba,CUB,,,CHI
+CU,Cuba,CUB,,,NAM
+CV,Cabo Verde,CPV,,,CHI
+CV,Cabo Verde,CPV,,,NAM
+CW,Curacao,CUW,,,CHI
+CW,Curacao,CUW,,,NAM
+CX,Christmas Island,,,,CHI
+CX,Christmas Island,,,,NAM
+CY,Cyprus,CYP,,,CHI
+CY,Cyprus,CYP,,,NAM
+CZ,Czechia,CZE,AT,Austria,AUT
+CZ,Czechia,CZE,DE,Germany,DEU
+CZ,Czechia,CZE,PL,Poland,POL
+CZ,Czechia,CZE,SK,Slovakia,SVK
+DE,Germany,DEU,AT,Austria,AUT
+DE,Germany,DEU,BE,Belgium,BEL
+DE,Germany,DEU,CZ,Czechia,CZE
+DE,Germany,DEU,DK,Denmark,DNK
+DE,Germany,DEU,FR,France,FRA
+DE,Germany,DEU,LU,Luxembourg,LUX
+DE,Germany,DEU,NL,Netherlands,NLD
+DE,Germany,DEU,PL,Poland,POL
+DE,Germany,DEU,CH,Switzerland,CHE
+DJ,Djibouti,DJI,ER,Eritrea,ERI
+DJ,Djibouti,DJI,ET,Ethiopia,ETH
+DJ,Djibouti,DJI,SO,Somalia,SOM
+DK,Denmark,DNK,DE,Germany,DEU
+DM,Dominica,DMA,,,CHI
+DM,Dominica,DMA,,,NAM
+DO,Dominican Republic,DOM,HT,Haiti,HTI
+DZ,Algeria,DZA,LY,Libya,LBY
+DZ,Algeria,DZA,ML,Mali,MLI
+DZ,Algeria,DZA,MR,Mauritania,MRT
+DZ,Algeria,DZA,MA,Morocco,MAR
+DZ,Algeria,DZA,NE,Niger,NER
+DZ,Algeria,DZA,TN,Tunisia,TUN
+DZ,Algeria,DZA,EH,Western Sahara,
+EC,Ecuador,ECU,CO,Colombia,COL
+EC,Ecuador,ECU,PE,Peru,PER
+EE,Estonia,EST,LV,Latvia,LVA
+EE,Estonia,EST,RU,Russian Federation,RUS
+EG,Egypt,EGY,IL,Israel,ISR
+EG,Egypt,EGY,LY,Libya,LBY
+EG,Egypt,EGY,PS,"Palestine, State of",PSE
+EG,Egypt,EGY,SD,Sudan,SDN
+EH,Western Sahara,,DZ,Algeria,DZA
+EH,Western Sahara,,MR,Mauritania,MRT
+EH,Western Sahara,,MA,Morocco,MAR
+ER,Eritrea,ERI,DJ,Djibouti,DJI
+ER,Eritrea,ERI,ET,Ethiopia,ETH
+ER,Eritrea,ERI,SD,Sudan,SDN
+ES,Spain,ESP,AD,Andorra,AND
+ES,Spain,ESP,FR,France,FRA
+ES,Spain,ESP,GI,Gibraltar,GIB
+ES,Spain,ESP,MA,Morocco,MAR
+ES,Spain,ESP,PT,Portugal,PRT
+ET,Ethiopia,ETH,DJ,Djibouti,DJI
+ET,Ethiopia,ETH,ER,Eritrea,ERI
+ET,Ethiopia,ETH,KE,Kenya,KEN
+ET,Ethiopia,ETH,SO,Somalia,SOM
+ET,Ethiopia,ETH,SS,South Sudan,SSD
+ET,Ethiopia,ETH,SD,Sudan,SDN
+FI,Finland,FIN,NO,Norway,NOR
+FI,Finland,FIN,RU,Russian Federation,RUS
+FI,Finland,FIN,SE,Sweden,SWE
+FJ,Fiji,FJI,,,CHI
+FJ,Fiji,FJI,,,NAM
+FK,Falkland Islands (Malvinas),,,,CHI
+FK,Falkland Islands (Malvinas),,,,NAM
+FM,Micronesia (Federated States of),FSM,,,CHI
+FM,Micronesia (Federated States of),FSM,,,NAM
+FO,Faroe Islands,FRO,,,CHI
+FO,Faroe Islands,FRO,,,NAM
+FR,France,FRA,AD,Andorra,AND
+FR,France,FRA,BE,Belgium,BEL
+FR,France,FRA,DE,Germany,DEU
+FR,France,FRA,IT,Italy,ITA
+FR,France,FRA,LU,Luxembourg,LUX
+FR,France,FRA,MC,Monaco,MCO
+FR,France,FRA,ES,Spain,ESP
+FR,France,FRA,CH,Switzerland,CHE
+GA,Gabon,GAB,CM,Cameroon,CMR
+GA,Gabon,GAB,CG,Congo,COG
+GA,Gabon,GAB,GQ,Equatorial Guinea,GNQ
+GB,United Kingdom of Great Britain and Northern Ireland,GBR,IE,Ireland,IRL
+GD,Grenada,GRD,,,CHI
+GD,Grenada,GRD,,,NAM
+GE,Georgia,GEO,AM,Armenia,ARM
+GE,Georgia,GEO,AZ,Azerbaijan,AZE
+GE,Georgia,GEO,RU,Russian Federation,RUS
+GE,Georgia,GEO,TR,Turkey,TUR
+GF,French Guiana,,BR,Brazil,BRA
+GF,French Guiana,,SR,Suriname,SUR
+GG,Guernsey,,,,CHI
+GG,Guernsey,,,,NAM
+GH,Ghana,GHA,BF,Burkina Faso,BFA
+GH,Ghana,GHA,CI,Cote d’Ivoire,CIV
+GH,Ghana,GHA,TG,Togo,TGO
+GI,Gibraltar,GIB,ES,Spain,ESP
+GL,Greenland,GRL,,,CHI
+GL,Greenland,GRL,,,NAM
+GM,Gambia (the),GMB,SN,Senegal,SEN
+GN,Guinea,GIN,CI,Cote d’Ivoire,CIV
+GN,Guinea,GIN,GW,Guinea-Bissau,GNB
+GN,Guinea,GIN,LR,Liberia,LBR
+GN,Guinea,GIN,ML,Mali,MLI
+GN,Guinea,GIN,SN,Senegal,SEN
+GN,Guinea,GIN,SL,Sierra Leone,SLE
+GP,Guadeloupe,,,,CHI
+GP,Guadeloupe,,,,NAM
+GQ,Equatorial Guinea,GNQ,CM,Cameroon,CMR
+GQ,Equatorial Guinea,GNQ,GA,Gabon,GAB
+GR,Greece,GRC,AL,Albania,ALB
+GR,Greece,GRC,BG,Bulgaria,BGR
+GR,Greece,GRC,MK,North Macedonia,MKD
+GR,Greece,GRC,TR,Turkey,TUR
+GS,South Georgia and the South Sandwich Islands,,,,CHI
+GS,South Georgia and the South Sandwich Islands,,,,NAM
+GT,Guatemala,GTM,BZ,Belize,BLZ
+GT,Guatemala,GTM,SV,El Salvador,SLV
+GT,Guatemala,GTM,HN,Honduras,HND
+GT,Guatemala,GTM,MX,Mexico,MEX
+GU,Guam,GUM,,,CHI
+GU,Guam,GUM,,,NAM
+GW,Guinea-Bissau,GNB,GN,Guinea,GIN
+GW,Guinea-Bissau,GNB,SN,Senegal,SEN
+GY,Guyana,GUY,BR,Brazil,BRA
+GY,Guyana,GUY,SR,Suriname,SUR
+GY,Guyana,GUY,VE,Venezuela (Bolivarian Republic of),VEN
+HK,Hong Kong,HKG,CN,China,CHN
+HM,Heard Island and McDonald Islands,,,,CHI
+HM,Heard Island and McDonald Islands,,,,NAM
+HN,Honduras,HND,SV,El Salvador,SLV
+HN,Honduras,HND,GT,Guatemala,GTM
+HN,Honduras,HND,NI,Nicaragua,NIC
+HR,Croatia,HRV,BA,Bosnia and Herzegovina,BIH
+HR,Croatia,HRV,HU,Hungary,HUN
+HR,Croatia,HRV,ME,Montenegro,MNE
+HR,Croatia,HRV,RS,Serbia,SRB
+HR,Croatia,HRV,SI,Slovenia,SVN
+HT,Haiti,HTI,DO,Dominican Republic,DOM
+HU,Hungary,HUN,AT,Austria,AUT
+HU,Hungary,HUN,HR,Croatia,HRV
+HU,Hungary,HUN,RO,Romania,ROU
+HU,Hungary,HUN,RS,Serbia,SRB
+HU,Hungary,HUN,SK,Slovakia,SVK
+HU,Hungary,HUN,SI,Slovenia,SVN
+HU,Hungary,HUN,UA,Ukraine,UKR
+ID,Indonesia,IDN,MY,Malaysia,MYS
+ID,Indonesia,IDN,PG,Papua New Guinea,PNG
+ID,Indonesia,IDN,TL,Timor-Leste,TLS
+IE,Ireland,IRL,GB,United Kingdom of Great Britain and Northern Ireland,GBR
+IL,Israel,ISR,EG,Egypt,EGY
+IL,Israel,ISR,JO,Jordan,JOR
+IL,Israel,ISR,LB,Lebanon,LBN
+IL,Israel,ISR,PS,"Palestine, State of",PSE
+IL,Israel,ISR,SY,Syrian Arab Republic,SYR
+IM,Isle of Man,IMN,,,CHI
+IM,Isle of Man,IMN,,,NAM
+IN,India,IND,BD,Bangladesh,BGD
+IN,India,IND,BT,Bhutan,BTN
+IN,India,IND,CN,China,CHN
+IN,India,IND,MM,Myanmar,MMR
+IN,India,IND,NP,Nepal,NPL
+IN,India,IND,PK,Pakistan,PAK
+IO,British Indian Ocean Territory,,,,CHI
+IO,British Indian Ocean Territory,,,,NAM
+IQ,Iraq,IRQ,IR,Iran (Islamic Republic of),IRN
+IQ,Iraq,IRQ,JO,Jordan,JOR
+IQ,Iraq,IRQ,KW,Kuwait,KWT
+IQ,Iraq,IRQ,SA,Saudi Arabia,SAU
+IQ,Iraq,IRQ,SY,Syrian Arab Republic,SYR
+IQ,Iraq,IRQ,TR,Turkey,TUR
+IR,Iran (Islamic Republic of),IRN,AF,Afghanistan,AFG
+IR,Iran (Islamic Republic of),IRN,AM,Armenia,ARM
+IR,Iran (Islamic Republic of),IRN,AZ,Azerbaijan,AZE
+IR,Iran (Islamic Republic of),IRN,IQ,Iraq,IRQ
+IR,Iran (Islamic Republic of),IRN,PK,Pakistan,PAK
+IR,Iran (Islamic Republic of),IRN,TR,Turkey,TUR
+IR,Iran (Islamic Republic of),IRN,TM,Turkmenistan,TKM
+IS,Iceland,ISL,,,CHI
+IS,Iceland,ISL,,,NAM
+IT,Italy,ITA,AT,Austria,AUT
+IT,Italy,ITA,FR,France,FRA
+IT,Italy,ITA,SM,San Marino,SMR
+IT,Italy,ITA,SI,Slovenia,SVN
+IT,Italy,ITA,CH,Switzerland,CHE
+IT,Italy,ITA,VA,Holy See,
+JE,Jersey,,,,CHI
+JE,Jersey,,,,NAM
+JM,Jamaica,JAM,,,CHI
+JM,Jamaica,JAM,,,NAM
+JO,Jordan,JOR,IQ,Iraq,IRQ
+JO,Jordan,JOR,IL,Israel,ISR
+JO,Jordan,JOR,PS,"Palestine, State of",PSE
+JO,Jordan,JOR,SA,Saudi Arabia,SAU
+JO,Jordan,JOR,SY,Syrian Arab Republic,SYR
+JP,Japan,JPN,,,CHI
+JP,Japan,JPN,,,NAM
+KE,Kenya,KEN,ET,Ethiopia,ETH
+KE,Kenya,KEN,SO,Somalia,SOM
+KE,Kenya,KEN,SS,South Sudan,SSD
+KE,Kenya,KEN,TZ,Tanzania (the United Republic of),TZA
+KE,Kenya,KEN,UG,Uganda,UGA
+KG,Kyrgyzstan,KGZ,CN,China,CHN
+KG,Kyrgyzstan,KGZ,KZ,Kazakhstan,KAZ
+KG,Kyrgyzstan,KGZ,TJ,Tajikistan,TJK
+KG,Kyrgyzstan,KGZ,UZ,Uzbekistan,UZB
+KH,Cambodia,KHM,LA,Lao People's Democratic Republic,LAO
+KH,Cambodia,KHM,TH,Thailand,THA
+KH,Cambodia,KHM,VN,Viet Nam,VNM
+KI,Kiribati,KIR,,,CHI
+KI,Kiribati,KIR,,,NAM
+KM,Comoros,COM,,,CHI
+KM,Comoros,COM,,,NAM
+KN,Saint Kitts and Nevis,KNA,,,CHI
+KN,Saint Kitts and Nevis,KNA,,,NAM
+KP,Korea (Democratic People's Republic of),PRK,CN,China,CHN
+KP,Korea (Democratic People's Republic of),PRK,KR,Korea (the Republic of),KOR
+KP,Korea (Democratic People's Republic of),PRK,RU,Russian Federation,RUS
+KR,Korea (the Republic of),KOR,KP,Korea (Democratic People's Republic of),PRK
+KW,Kuwait,KWT,IQ,Iraq,IRQ
+KW,Kuwait,KWT,SA,Saudi Arabia,SAU
+KY,Cayman Islands,CYM,,,CHI
+KY,Cayman Islands,CYM,,,NAM
+KZ,Kazakhstan,KAZ,CN,China,CHN
+KZ,Kazakhstan,KAZ,KG,Kyrgyzstan,KGZ
+KZ,Kazakhstan,KAZ,RU,Russian Federation,RUS
+KZ,Kazakhstan,KAZ,TM,Turkmenistan,TKM
+KZ,Kazakhstan,KAZ,UZ,Uzbekistan,UZB
+LA,Lao People's Democratic Republic,LAO,CN,China,CHN
+LA,Lao People's Democratic Republic,LAO,KH,Cambodia,KHM
+LA,Lao People's Democratic Republic,LAO,MM,Myanmar,MMR
+LA,Lao People's Democratic Republic,LAO,TH,Thailand,THA
+LA,Lao People's Democratic Republic,LAO,VN,Viet Nam,VNM
+LB,Lebanon,LBN,IL,Israel,ISR
+LB,Lebanon,LBN,SY,Syrian Arab Republic,SYR
+LC,Saint Lucia,LCA,,,CHI
+LC,Saint Lucia,LCA,,,NAM
+LI,Liechtenstein,LIE,AT,Austria,AUT
+LI,Liechtenstein,LIE,CH,Switzerland,CHE
+LK,Sri Lanka,LKA,,,CHI
+LK,Sri Lanka,LKA,,,NAM
+LR,Liberia,LBR,CI,Cote d’Ivoire,CIV
+LR,Liberia,LBR,GN,Guinea,GIN
+LR,Liberia,LBR,SL,Sierra Leone,SLE
+LS,Lesotho,LSO,ZA,South Africa,ZAF
+LT,Lithuania,LTU,BY,Belarus,BLR
+LT,Lithuania,LTU,LV,Latvia,LVA
+LT,Lithuania,LTU,PL,Poland,POL
+LT,Lithuania,LTU,RU,Russian Federation,RUS
+LU,Luxembourg,LUX,BE,Belgium,BEL
+LU,Luxembourg,LUX,DE,Germany,DEU
+LU,Luxembourg,LUX,FR,France,FRA
+LV,Latvia,LVA,BY,Belarus,BLR
+LV,Latvia,LVA,EE,Estonia,EST
+LV,Latvia,LVA,LT,Lithuania,LTU
+LV,Latvia,LVA,RU,Russian Federation,RUS
+LY,Libya,LBY,DZ,Algeria,DZA
+LY,Libya,LBY,TD,Chad,TCD
+LY,Libya,LBY,EG,Egypt,EGY
+LY,Libya,LBY,NE,Niger,NER
+LY,Libya,LBY,SD,Sudan,SDN
+LY,Libya,LBY,TN,Tunisia,TUN
+MA,Morocco,MAR,DZ,Algeria,DZA
+MA,Morocco,MAR,ES,Spain,ESP
+MA,Morocco,MAR,EH,Western Sahara,
+MC,Monaco,MCO,FR,France,FRA
+MD,Moldova (the Republic of),MDA,RO,Romania,ROU
+MD,Moldova (the Republic of),MDA,UA,Ukraine,UKR
+ME,Montenegro,MNE,AL,Albania,ALB
+ME,Montenegro,MNE,BA,Bosnia and Herzegovina,BIH
+ME,Montenegro,MNE,HR,Croatia,HRV
+ME,Montenegro,MNE,RS,Serbia,SRB
+MF,Saint Martin (French part),MAF,SX,Sint Maarten (Dutch part),SXM
+MG,Madagascar,MDG,,,CHI
+MG,Madagascar,MDG,,,NAM
+MH,Marshall Islands,MHL,,,CHI
+MH,Marshall Islands,MHL,,,NAM
+MK,North Macedonia,MKD,AL,Albania,ALB
+MK,North Macedonia,MKD,BG,Bulgaria,BGR
+MK,North Macedonia,MKD,GR,Greece,GRC
+MK,North Macedonia,MKD,RS,Serbia,SRB
+ML,Mali,MLI,DZ,Algeria,DZA
+ML,Mali,MLI,BF,Burkina Faso,BFA
+ML,Mali,MLI,CI,Cote d’Ivoire,CIV
+ML,Mali,MLI,GN,Guinea,GIN
+ML,Mali,MLI,MR,Mauritania,MRT
+ML,Mali,MLI,NE,Niger,NER
+ML,Mali,MLI,SN,Senegal,SEN
+MM,Myanmar,MMR,BD,Bangladesh,BGD
+MM,Myanmar,MMR,CN,China,CHN
+MM,Myanmar,MMR,IN,India,IND
+MM,Myanmar,MMR,LA,Lao People's Democratic Republic,LAO
+MM,Myanmar,MMR,TH,Thailand,THA
+MN,Mongolia,MNG,CN,China,CHN
+MN,Mongolia,MNG,RU,Russian Federation,RUS
+MO,Macao,MAC,CN,China,CHN
+MP,Northern Mariana Islands,MNP,,,CHI
+MP,Northern Mariana Islands,MNP,,,NAM
+MQ,Martinique,,,,CHI
+MQ,Martinique,,,,NAM
+MR,Mauritania,MRT,DZ,Algeria,DZA
+MR,Mauritania,MRT,ML,Mali,MLI
+MR,Mauritania,MRT,SN,Senegal,SEN
+MR,Mauritania,MRT,EH,Western Sahara,
+MS,Montserrat,,,,CHI
+MS,Montserrat,,,,NAM
+MT,Malta,MLT,,,CHI
+MT,Malta,MLT,,,NAM
+MU,Mauritius,MUS,,,CHI
+MU,Mauritius,MUS,,,NAM
+MV,Maldives,MDV,,,CHI
+MV,Maldives,MDV,,,NAM
+MW,Malawi,MWI,MZ,Mozambique,MOZ
+MW,Malawi,MWI,TZ,Tanzania (the United Republic of),TZA
+MW,Malawi,MWI,ZM,Zambia,ZMB
+MX,Mexico,MEX,BZ,Belize,BLZ
+MX,Mexico,MEX,GT,Guatemala,GTM
+MX,Mexico,MEX,US,United States of America,USA
+MY,Malaysia,MYS,BN,Brunei Darussalam,BRN
+MY,Malaysia,MYS,ID,Indonesia,IDN
+MY,Malaysia,MYS,TH,Thailand,THA
+MZ,Mozambique,MOZ,MW,Malawi,MWI
+MZ,Mozambique,MOZ,SZ,Eswatini,SWZ
+MZ,Mozambique,MOZ,ZA,South Africa,ZAF
+MZ,Mozambique,MOZ,TZ,Tanzania (the United Republic of),TZA
+MZ,Mozambique,MOZ,ZM,Zambia,ZMB
+MZ,Mozambique,MOZ,ZW,Zimbabwe,ZWE
+,Namibia,CHI,AO,Angola,AGO
+,Namibia,NAM,AO,Angola,AGO
+,Namibia,CHI,BW,Botswana,BWA
+,Namibia,NAM,BW,Botswana,BWA
+,Namibia,CHI,ZA,South Africa,ZAF
+,Namibia,NAM,ZA,South Africa,ZAF
+,Namibia,CHI,ZM,Zambia,ZMB
+,Namibia,NAM,ZM,Zambia,ZMB
+NC,New Caledonia,NCL,,,CHI
+NC,New Caledonia,NCL,,,NAM
+NE,Niger,NER,DZ,Algeria,DZA
+NE,Niger,NER,BJ,Benin,BEN
+NE,Niger,NER,BF,Burkina Faso,BFA
+NE,Niger,NER,TD,Chad,TCD
+NE,Niger,NER,LY,Libya,LBY
+NE,Niger,NER,ML,Mali,MLI
+NE,Niger,NER,NG,Nigeria,NGA
+NF,Norfolk Island,,,,CHI
+NF,Norfolk Island,,,,NAM
+NG,Nigeria,NGA,BJ,Benin,BEN
+NG,Nigeria,NGA,CM,Cameroon,CMR
+NG,Nigeria,NGA,TD,Chad,TCD
+NG,Nigeria,NGA,NE,Niger,NER
+NI,Nicaragua,NIC,CR,Costa Rica,CRI
+NI,Nicaragua,NIC,HN,Honduras,HND
+NL,Netherlands,NLD,BE,Belgium,BEL
+NL,Netherlands,NLD,DE,Germany,DEU
+NO,Norway,NOR,FI,Finland,FIN
+NO,Norway,NOR,RU,Russian Federation,RUS
+NO,Norway,NOR,SE,Sweden,SWE
+NP,Nepal,NPL,CN,China,CHN
+NP,Nepal,NPL,IN,India,IND
+NR,Nauru,NRU,,,CHI
+NR,Nauru,NRU,,,NAM
+NU,Niue,,,,CHI
+NU,Niue,,,,NAM
+NZ,New Zealand,NZL,,,CHI
+NZ,New Zealand,NZL,,,NAM
+OM,Oman,OMN,AE,United Arab Emirates,ARE
+OM,Oman,OMN,SA,Saudi Arabia,SAU
+OM,Oman,OMN,YE,Yemen,YEM
+PA,Panama,PAN,CO,Colombia,COL
+PA,Panama,PAN,CR,Costa Rica,CRI
+PE,Peru,PER,BO,Bolivia (Plurinational State Of),BOL
+PE,Peru,PER,BR,Brazil,BRA
+PE,Peru,PER,CL,Chile,CHL
+PE,Peru,PER,CO,Colombia,COL
+PE,Peru,PER,EC,Ecuador,ECU
+PF,French Polynesia,PYF,,,CHI
+PF,French Polynesia,PYF,,,NAM
+PG,Papua New Guinea,PNG,ID,Indonesia,IDN
+PH,Philippines,PHL,,,CHI
+PH,Philippines,PHL,,,NAM
+PK,Pakistan,PAK,AF,Afghanistan,AFG
+PK,Pakistan,PAK,CN,China,CHN
+PK,Pakistan,PAK,IN,India,IND
+PK,Pakistan,PAK,IR,Iran (Islamic Republic of),IRN
+PL,Poland,POL,BY,Belarus,BLR
+PL,Poland,POL,CZ,Czechia,CZE
+PL,Poland,POL,DE,Germany,DEU
+PL,Poland,POL,LT,Lithuania,LTU
+PL,Poland,POL,RU,Russian Federation,RUS
+PL,Poland,POL,SK,Slovakia,SVK
+PL,Poland,POL,UA,Ukraine,UKR
+PM,Saint Pierre and Miquelon,,,,CHI
+PM,Saint Pierre and Miquelon,,,,NAM
+PN,Pitcairn,,,,CHI
+PN,Pitcairn,,,,NAM
+PR,Puerto Rico,PRI,,,CHI
+PR,Puerto Rico,PRI,,,NAM
+PS,"Palestine, State of",PSE,EG,Egypt,EGY
+PS,"Palestine, State of",PSE,IL,Israel,ISR
+PS,"Palestine, State of",PSE,JO,Jordan,JOR
+PT,Portugal,PRT,ES,Spain,ESP
+PW,Palau,PLW,,,CHI
+PW,Palau,PLW,,,NAM
+PY,Paraguay,PRY,AR,Argentina,ARG
+PY,Paraguay,PRY,BO,Bolivia (Plurinational State Of),BOL
+PY,Paraguay,PRY,BR,Brazil,BRA
+QA,Qatar,QAT,SA,Saudi Arabia,SAU
+RE,Reunion,,,,CHI
+RE,Reunion,,,,NAM
+RO,Romania,ROU,BG,Bulgaria,BGR
+RO,Romania,ROU,HU,Hungary,HUN
+RO,Romania,ROU,MD,Moldova (the Republic of),MDA
+RO,Romania,ROU,RS,Serbia,SRB
+RO,Romania,ROU,UA,Ukraine,UKR
+RS,Serbia,SRB,AL,Albania,ALB
+RS,Serbia,SRB,BA,Bosnia and Herzegovina,BIH
+RS,Serbia,SRB,BG,Bulgaria,BGR
+RS,Serbia,SRB,HR,Croatia,HRV
+RS,Serbia,SRB,HU,Hungary,HUN
+RS,Serbia,SRB,ME,Montenegro,MNE
+RS,Serbia,SRB,MK,North Macedonia,MKD
+RS,Serbia,SRB,RO,Romania,ROU
+RU,Russian Federation,RUS,AZ,Azerbaijan,AZE
+RU,Russian Federation,RUS,BY,Belarus,BLR
+RU,Russian Federation,RUS,CN,China,CHN
+RU,Russian Federation,RUS,EE,Estonia,EST
+RU,Russian Federation,RUS,FI,Finland,FIN
+RU,Russian Federation,RUS,GE,Georgia,GEO
+RU,Russian Federation,RUS,KZ,Kazakhstan,KAZ
+RU,Russian Federation,RUS,KP,Korea (Democratic People's Republic of),PRK
+RU,Russian Federation,RUS,LV,Latvia,LVA
+RU,Russian Federation,RUS,LT,Lithuania,LTU
+RU,Russian Federation,RUS,MN,Mongolia,MNG
+RU,Russian Federation,RUS,NO,Norway,NOR
+RU,Russian Federation,RUS,PL,Poland,POL
+RU,Russian Federation,RUS,UA,Ukraine,UKR
+RW,Rwanda,RWA,BI,Burundi,BDI
+RW,Rwanda,RWA,CD,Congo (the Democratic Republic of the),COD
+RW,Rwanda,RWA,TZ,Tanzania (the United Republic of),TZA
+RW,Rwanda,RWA,UG,Uganda,UGA
+SA,Saudi Arabia,SAU,IQ,Iraq,IRQ
+SA,Saudi Arabia,SAU,JO,Jordan,JOR
+SA,Saudi Arabia,SAU,KW,Kuwait,KWT
+SA,Saudi Arabia,SAU,OM,Oman,OMN
+SA,Saudi Arabia,SAU,QA,Qatar,QAT
+SA,Saudi Arabia,SAU,AE,United Arab Emirates,ARE
+SA,Saudi Arabia,SAU,YE,Yemen,YEM
+SB,Solomon Islands,SLB,,,CHI
+SB,Solomon Islands,SLB,,,NAM
+SC,Seychelles,SYC,,,CHI
+SC,Seychelles,SYC,,,NAM
+SD,Sudan,SDN,CF,Central African Republic,CAF
+SD,Sudan,SDN,TD,Chad,TCD
+SD,Sudan,SDN,EG,Egypt,EGY
+SD,Sudan,SDN,ET,Ethiopia,ETH
+SD,Sudan,SDN,ER,Eritrea,ERI
+SD,Sudan,SDN,LY,Libya,LBY
+SD,Sudan,SDN,SS,South Sudan,SSD
+SE,Sweden,SWE,FI,Finland,FIN
+SE,Sweden,SWE,NO,Norway,NOR
+SG,Singapore,SGP,,,CHI
+SG,Singapore,SGP,,,NAM
+SH,"Saint Helena, Ascension and Tristan da Cunha",,,,CHI
+SH,"Saint Helena, Ascension and Tristan da Cunha",,,,NAM
+SI,Slovenia,SVN,AT,Austria,AUT
+SI,Slovenia,SVN,HR,Croatia,HRV
+SI,Slovenia,SVN,HU,Hungary,HUN
+SI,Slovenia,SVN,IT,Italy,ITA
+SJ,Svalbard and Jan Mayen,,,,CHI
+SJ,Svalbard and Jan Mayen,,,,NAM
+SK,Slovakia,SVK,AT,Austria,AUT
+SK,Slovakia,SVK,CZ,Czechia,CZE
+SK,Slovakia,SVK,HU,Hungary,HUN
+SK,Slovakia,SVK,PL,Poland,POL
+SK,Slovakia,SVK,UA,Ukraine,UKR
+SL,Sierra Leone,SLE,GN,Guinea,GIN
+SL,Sierra Leone,SLE,LR,Liberia,LBR
+SM,San Marino,SMR,IT,Italy,ITA
+SN,Senegal,SEN,GM,Gambia (the),GMB
+SN,Senegal,SEN,GN,Guinea,GIN
+SN,Senegal,SEN,GW,Guinea-Bissau,GNB
+SN,Senegal,SEN,ML,Mali,MLI
+SN,Senegal,SEN,MR,Mauritania,MRT
+SO,Somalia,SOM,DJ,Djibouti,DJI
+SO,Somalia,SOM,ET,Ethiopia,ETH
+SO,Somalia,SOM,KE,Kenya,KEN
+SR,Suriname,SUR,BR,Brazil,BRA
+SR,Suriname,SUR,GF,French Guiana,
+SR,Suriname,SUR,GY,Guyana,GUY
+SS,South Sudan,SSD,CF,Central African Republic,CAF
+SS,South Sudan,SSD,CD,Congo (the Democratic Republic of the),COD
+SS,South Sudan,SSD,ET,Ethiopia,ETH
+SS,South Sudan,SSD,KE,Kenya,KEN
+SS,South Sudan,SSD,SD,Sudan,SDN
+SS,South Sudan,SSD,UG,Uganda,UGA
+ST,Sao Tome and Principe,STP,,,CHI
+ST,Sao Tome and Principe,STP,,,NAM
+SV,El Salvador,SLV,GT,Guatemala,GTM
+SV,El Salvador,SLV,HN,Honduras,HND
+SX,Sint Maarten (Dutch part),SXM,MF,Saint Martin (French part),MAF
+SY,Syrian Arab Republic,SYR,IQ,Iraq,IRQ
+SY,Syrian Arab Republic,SYR,IL,Israel,ISR
+SY,Syrian Arab Republic,SYR,JO,Jordan,JOR
+SY,Syrian Arab Republic,SYR,LB,Lebanon,LBN
+SY,Syrian Arab Republic,SYR,TR,Turkey,TUR
+SZ,Eswatini,SWZ,MZ,Mozambique,MOZ
+SZ,Eswatini,SWZ,ZA,South Africa,ZAF
+TC,Turks and Caicos Islands,TCA,,,CHI
+TC,Turks and Caicos Islands,TCA,,,NAM
+TD,Chad,TCD,CM,Cameroon,CMR
+TD,Chad,TCD,CF,Central African Republic,CAF
+TD,Chad,TCD,LY,Libya,LBY
+TD,Chad,TCD,NE,Niger,NER
+TD,Chad,TCD,NG,Nigeria,NGA
+TD,Chad,TCD,SD,Sudan,SDN
+TF,French Southern Territories,,,,CHI
+TF,French Southern Territories,,,,NAM
+TG,Togo,TGO,BJ,Benin,BEN
+TG,Togo,TGO,BF,Burkina Faso,BFA
+TG,Togo,TGO,GH,Ghana,GHA
+TH,Thailand,THA,KH,Cambodia,KHM
+TH,Thailand,THA,LA,Lao People's Democratic Republic,LAO
+TH,Thailand,THA,MY,Malaysia,MYS
+TH,Thailand,THA,MM,Myanmar,MMR
+TJ,Tajikistan,TJK,AF,Afghanistan,AFG
+TJ,Tajikistan,TJK,CN,China,CHN
+TJ,Tajikistan,TJK,KG,Kyrgyzstan,KGZ
+TJ,Tajikistan,TJK,UZ,Uzbekistan,UZB
+TK,Tokelau,,,,CHI
+TK,Tokelau,,,,NAM
+TL,Timor-Leste,TLS,ID,Indonesia,IDN
+TM,Turkmenistan,TKM,AF,Afghanistan,AFG
+TM,Turkmenistan,TKM,IR,Iran (Islamic Republic of),IRN
+TM,Turkmenistan,TKM,KZ,Kazakhstan,KAZ
+TM,Turkmenistan,TKM,UZ,Uzbekistan,UZB
+TN,Tunisia,TUN,DZ,Algeria,DZA
+TN,Tunisia,TUN,LY,Libya,LBY
+TO,Tonga,TON,,,CHI
+TO,Tonga,TON,,,NAM
+TR,Turkey,TUR,AM,Armenia,ARM
+TR,Turkey,TUR,AZ,Azerbaijan,AZE
+TR,Turkey,TUR,BG,Bulgaria,BGR
+TR,Turkey,TUR,GE,Georgia,GEO
+TR,Turkey,TUR,GR,Greece,GRC
+TR,Turkey,TUR,IR,Iran (Islamic Republic of),IRN
+TR,Turkey,TUR,IQ,Iraq,IRQ
+TR,Turkey,TUR,SY,Syrian Arab Republic,SYR
+TT,Trinidad and Tobago,TTO,,,CHI
+TT,Trinidad and Tobago,TTO,,,NAM
+TV,Tuvalu,TUV,,,CHI
+TV,Tuvalu,TUV,,,NAM
+TW,Taiwan (Province of China),,,,CHI
+TW,Taiwan (Province of China),,,,NAM
+TZ,Tanzania (the United Republic of),TZA,BI,Burundi,BDI
+TZ,Tanzania (the United Republic of),TZA,CD,Congo (the Democratic Republic of the),COD
+TZ,Tanzania (the United Republic of),TZA,KE,Kenya,KEN
+TZ,Tanzania (the United Republic of),TZA,MW,Malawi,MWI
+TZ,Tanzania (the United Republic of),TZA,MZ,Mozambique,MOZ
+TZ,Tanzania (the United Republic of),TZA,RW,Rwanda,RWA
+TZ,Tanzania (the United Republic of),TZA,UG,Uganda,UGA
+TZ,Tanzania (the United Republic of),TZA,ZM,Zambia,ZMB
+UA,Ukraine,UKR,BY,Belarus,BLR
+UA,Ukraine,UKR,HU,Hungary,HUN
+UA,Ukraine,UKR,MD,Moldova (the Republic of),MDA
+UA,Ukraine,UKR,PL,Poland,POL
+UA,Ukraine,UKR,RO,Romania,ROU
+UA,Ukraine,UKR,RU,Russian Federation,RUS
+UA,Ukraine,UKR,SK,Slovakia,SVK
+UG,Uganda,UGA,CD,Congo (the Democratic Republic of the),COD
+UG,Uganda,UGA,KE,Kenya,KEN
+UG,Uganda,UGA,RW,Rwanda,RWA
+UG,Uganda,UGA,SS,South Sudan,SSD
+UG,Uganda,UGA,TZ,Tanzania (the United Republic of),TZA
+UM,United States Minor Outlying Islands,,,,CHI
+UM,United States Minor Outlying Islands,,,,NAM
+US,United States of America,USA,CA,Canada,CAN
+US,United States of America,USA,MX,Mexico,MEX
+UY,Uruguay,URY,AR,Argentina,ARG
+UY,Uruguay,URY,BR,Brazil,BRA
+UZ,Uzbekistan,UZB,AF,Afghanistan,AFG
+UZ,Uzbekistan,UZB,KZ,Kazakhstan,KAZ
+UZ,Uzbekistan,UZB,KG,Kyrgyzstan,KGZ
+UZ,Uzbekistan,UZB,TJ,Tajikistan,TJK
+UZ,Uzbekistan,UZB,TM,Turkmenistan,TKM
+VA,Holy See,,IT,Italy,ITA
+VC,Saint Vincent and the Grenadines,VCT,,,CHI
+VC,Saint Vincent and the Grenadines,VCT,,,NAM
+VE,Venezuela (Bolivarian Republic of),VEN,BR,Brazil,BRA
+VE,Venezuela (Bolivarian Republic of),VEN,CO,Colombia,COL
+VE,Venezuela (Bolivarian Republic of),VEN,GY,Guyana,GUY
+VG,Virgin Islands (British),VGB,,,CHI
+VG,Virgin Islands (British),VGB,,,NAM
+VI,Virgin Islands (U.S.),VIR,,,CHI
+VI,Virgin Islands (U.S.),VIR,,,NAM
+VN,Viet Nam,VNM,KH,Cambodia,KHM
+VN,Viet Nam,VNM,CN,China,CHN
+VN,Viet Nam,VNM,LA,Lao People's Democratic Republic,LAO
+VU,Vanuatu,VUT,,,CHI
+VU,Vanuatu,VUT,,,NAM
+WF,Wallis and Futuna,,,,CHI
+WF,Wallis and Futuna,,,,NAM
+WS,Samoa,WSM,,,CHI
+WS,Samoa,WSM,,,NAM
+YE,Yemen,YEM,OM,Oman,OMN
+YE,Yemen,YEM,SA,Saudi Arabia,SAU
+YT,Mayotte,,,,CHI
+YT,Mayotte,,,,NAM
+ZA,South Africa,ZAF,BW,Botswana,BWA
+ZA,South Africa,ZAF,LS,Lesotho,LSO
+ZA,South Africa,ZAF,MZ,Mozambique,MOZ
+ZA,South Africa,ZAF,,Namibia,CHI
+ZA,South Africa,ZAF,,Namibia,NAM
+ZA,South Africa,ZAF,SZ,Eswatini,SWZ
+ZA,South Africa,ZAF,ZW,Zimbabwe,ZWE
+ZM,Zambia,ZMB,AO,Angola,AGO
+ZM,Zambia,ZMB,BW,Botswana,BWA
+ZM,Zambia,ZMB,CD,Congo (the Democratic Republic of the),COD
+ZM,Zambia,ZMB,MW,Malawi,MWI
+ZM,Zambia,ZMB,MZ,Mozambique,MOZ
+ZM,Zambia,ZMB,,Namibia,CHI
+ZM,Zambia,ZMB,,Namibia,NAM
+ZM,Zambia,ZMB,TZ,Tanzania (the United Republic of),TZA
+ZM,Zambia,ZMB,ZW,Zimbabwe,ZWE
+ZW,Zimbabwe,ZWE,BW,Botswana,BWA
+ZW,Zimbabwe,ZWE,MZ,Mozambique,MOZ
+ZW,Zimbabwe,ZWE,ZA,South Africa,ZAF
+ZW,Zimbabwe,ZWE,ZM,Zambia,ZMB

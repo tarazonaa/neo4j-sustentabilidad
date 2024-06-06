@@ -1,0 +1,56 @@
+Topic,TopicID
+Environment: Land use,ENVIRONMENT:_LAND_USE
+Environment: Agricultural production,ENVIRONMENT:_AGRICULTURAL_PRODUCTION
+Economic Policy & Debt: Balance of payments: Capital & financial account,ECONOMIC_POLICY_&_DEBT:_BALANCE_OF_PAYMENTS:_CAPITAL_&_FINANCIAL_ACCOUNT
+Economic Policy & Debt: Balance of payments: Current account: Transfers,ECONOMIC_POLICY_&_DEBT:_BALANCE_OF_PAYMENTS:_CURRENT_ACCOUNT:_TRANSFERS
+Economic Policy & Debt: Official development assistance,ECONOMIC_POLICY_&_DEBT:_OFFICIAL_DEVELOPMENT_ASSISTANCE
+"World Bank, Global Development Finance.","WORLD_BANK,_GLOBAL_DEVELOPMENT_FINANCE."
+Environment: Energy production & use,ENVIRONMENT:_ENERGY_PRODUCTION_&_USE
+Environment: Emissions,ENVIRONMENT:_EMISSIONS
+Environment: Biodiversity & protected areas,ENVIRONMENT:_BIODIVERSITY_&_PROTECTED_AREAS
+Environment: Density & urbanization,ENVIRONMENT:_DENSITY_&_URBANIZATION
+Environment: Freshwater,ENVIRONMENT:_FRESHWATER
+Financial Sector: Access,FINANCIAL_SECTOR:_ACCESS
+Infrastructure: Technology,INFRASTRUCTURE:_TECHNOLOGY
+Public Sector: Government finance: Revenue,PUBLIC_SECTOR:_GOVERNMENT_FINANCE:_REVENUE
+Public Sector: Government finance,PUBLIC_SECTOR:_GOVERNMENT_FINANCE
+Private Sector & Trade: Business environment,PRIVATE_SECTOR_&_TRADE:_BUSINESS_ENVIRONMENT
+Private Sector & Trade: Private infrastructure investment,PRIVATE_SECTOR_&_TRADE:_PRIVATE_INFRASTRUCTURE_INVESTMENT
+Public Sector: Policy & institutions,PUBLIC_SECTOR:_POLICY_&_INSTITUTIONS
+Infrastructure: Transportation,INFRASTRUCTURE:_TRANSPORTATION
+Infrastructure: Communications,INFRASTRUCTURE:_COMMUNICATIONS
+Economic Policy & Debt: National accounts: Shares of GDP & other,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_SHARES_OF_GDP_&_OTHER
+Economic Policy & Debt: National accounts: US$ at constant 2010 prices: Value added,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_US$_AT_CONSTANT_2010_PRICES:_VALUE_ADDED
+Economic Policy & Debt: National accounts: US$ at current prices: Value added,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_US$_AT_CURRENT_PRICES:_VALUE_ADDED
+Economic Policy & Debt: National accounts: Adjusted savings & income,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_ADJUSTED_SAVINGS_&_INCOME
+Environment: Natural resources contribution to GDP,ENVIRONMENT:_NATURAL_RESOURCES_CONTRIBUTION_TO_GDP
+Economic Policy & Debt: National accounts: US$ at current prices: Aggregate indicators,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_US$_AT_CURRENT_PRICES:_AGGREGATE_INDICATORS
+Economic Policy & Debt: National accounts: Local currency at current prices: Aggregate indicators,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_LOCAL_CURRENCY_AT_CURRENT_PRICES:_AGGREGATE_INDICATORS
+Economic Policy & Debt: National accounts: US$ at constant 2010 prices: Aggregate indicators,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_US$_AT_CONSTANT_2010_PRICES:_AGGREGATE_INDICATORS
+Economic Policy & Debt: National accounts: Growth rates,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_GROWTH_RATES
+Economic Policy & Debt: National accounts: Local currency at constant prices: Aggregate indicators,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_LOCAL_CURRENCY_AT_CONSTANT_PRICES:_AGGREGATE_INDICATORS
+Economic Policy & Debt: Purchasing power parity,ECONOMIC_POLICY_&_DEBT:_PURCHASING_POWER_PARITY
+Economic Policy & Debt: National accounts: Atlas GNI & GNI per capita,ECONOMIC_POLICY_&_DEBT:_NATIONAL_ACCOUNTS:_ATLAS_GNI_&_GNI_PER_CAPITA
+Social Protection & Labor: Performance,SOCIAL_PROTECTION_&_LABOR:_PERFORMANCE
+Education: Outcomes,EDUCATION:_OUTCOMES
+Education: Participation,EDUCATION:_PARTICIPATION
+Education: Inputs,EDUCATION:_INPUTS
+Education: Efficiency,EDUCATION:_EFFICIENCY
+Gender: Public life & decision making,GENDER:_PUBLIC_LIFE_&_DECISION_MAKING
+Gender: Participation & access,GENDER:_PARTICIPATION_&_ACCESS
+Gender: Health,GENDER:_HEALTH
+Health: Risk factors,HEALTH:_RISK_FACTORS
+Health: Nutrition,HEALTH:_NUTRITION
+Health: Mortality,HEALTH:_MORTALITY
+Health: Reproductive health,HEALTH:_REPRODUCTIVE_HEALTH
+Health: Disease prevention,HEALTH:_DISEASE_PREVENTION
+Health: Health systems,HEALTH:_HEALTH_SYSTEMS
+Health: Universal Health Coverage,HEALTH:_UNIVERSAL_HEALTH_COVERAGE
+Poverty: Poverty rates,POVERTY:_POVERTY_RATES
+Poverty: Shared prosperity,POVERTY:_SHARED_PROSPERITY
+Social Protection & Labor: Economic activity,SOCIAL_PROTECTION_&_LABOR:_ECONOMIC_ACTIVITY
+Social Protection & Labor: Unemployment,SOCIAL_PROTECTION_&_LABOR:_UNEMPLOYMENT
+Gender: Agency,GENDER:_AGENCY
+Health: Population: Dynamics,HEALTH:_POPULATION:_DYNAMICS
+Private Sector & Trade: Tariffs,PRIVATE_SECTOR_&_TRADE:_TARIFFS
+Public Sector: Conflict & fragility,PUBLIC_SECTOR:_CONFLICT_&_FRAGILITY
